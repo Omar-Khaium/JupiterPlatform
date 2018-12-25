@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".NoInternetConnectionActivity">
+
+    <ImageView
+        android:layout_width="256dp"
+        android:layout_height="256dp"
+        android:src="@drawable/ic_no_internet" />
+
+    <Button
+        android:id="@+id/no_internet_connection_refresh"
+        android:layout_width="256dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/buttonshape"
+        android:backgroundTint="#ff575c"
+        android:elevation="50dp"
+        android:text="Refresh"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="14dp"
+        android:textStyle="bold" />
+</LinearLayout>

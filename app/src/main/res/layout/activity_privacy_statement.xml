@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/White"
+    android:orientation="vertical"
+    tools:context=".PrivacyStatementActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/login_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:title="Privacy Statement"
+            app:titleTextColor="@color/nav_item_background" />
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".95">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/White"
+            android:padding="5dp"
+            android:text="@string/privacy_statement"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textColorHighlight="@color/YellowGreen"
+            android:textColorLink="@color/Blue"
+            android:textSize="12dp"
+            android:textStyle="normal" />
+    </ScrollView>
+
+    <Button
+        android:id="@+id/privacy_ok"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="15dp"
+        android:layout_weight=".075"
+        android:background="@drawable/edittext"
+        android:backgroundTint="@color/item_background"
+        android:text="OK"
+        android:textSize="20dp" />
+
+</LinearLayout>

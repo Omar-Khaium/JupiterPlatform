@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/view_notes_row_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:hint="Omar Khaium"
+            android:textColor="@color/leadCentralExtraSubtext"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/view_notes_row_date"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:gravity="right"
+            android:hint="Sunday, 26 Nov, 2018"
+            android:textColor="@color/leadCentralExtraSubtext"
+            android:textSize="14dp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/view_notes_row_note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Note's Description"
+        android:padding="5dp"
+        android:textColor="@color/leadCentralHeader"
+        android:textSize="16dp" />
+
+
+</LinearLayout>

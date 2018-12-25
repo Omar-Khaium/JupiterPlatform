@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/White"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight=".9">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/callerNameTextview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Caller Name"
+                        android:textColor="@color/leadCentralHeader"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/callTypeTextview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Call Type"
+                        android:textColor="@color/leadCentralSubtext"
+                        android:textSize="14dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/addressTextview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:hint="Name"
+                        android:textColor="@color/leadCentralSubtext"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/numberTextview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:hint="Contact"
+                        android:textColor="@color/leadCentralExtraSubtext"
+                        android:textSize="14dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/dateTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Date"
+                android:textColor="@color/leadCentralExtraSubtext"
+                android:textSize="12dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight=".1 "
+        android:src="@drawable/arrow_ic" />
+
+</LinearLayout>

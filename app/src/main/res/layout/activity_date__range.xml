@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="#D7D6EC"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".DateRangeActivity">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="?attr/colorPrimary"
+        android:gravity="center"
+        android:minHeight="?attr/actionBarSize"
+        app:titleTextColor="#6cb53f">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/toolbarText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Pick Date"
+                android:textColor="#6cb53f" />
+
+            <TextView
+                android:id="@+id/toolbarSubText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="#6cb53f" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:background="@android:color/transparent"
+            android:drawableStart="@drawable/back"
+            android:drawableLeft="@drawable/back"
+            android:padding="6dp"
+            android:text="Back"
+            android:textColor="@color/White" />
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <DatePicker
+            android:id="@+id/date_range_from"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".4"
+            android:background="@color/White"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight=".1"
+            android:gravity="center"
+
+            android:text="To"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <DatePicker
+            android:id="@+id/date_range_to"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".4"
+            android:background="@color/White"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+
+            android:layout_weight=".1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/date_range_submit"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:layout_weight=".1"
+                android:background="@drawable/send_button_shape"
+                android:gravity="center"
+                android:text="Submit"
+                android:textAllCaps="false"
+                android:textColor="@color/White"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

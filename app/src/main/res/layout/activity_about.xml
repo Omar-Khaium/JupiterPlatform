@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/White"
+    android:orientation="vertical"
+    tools:context=".AboutUsActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="?attr/colorPrimary"
+        android:gravity="center"
+        android:minHeight="?attr/actionBarSize"
+        app:titleTextColor="#6cb53f">
+
+        <Button
+            android:id="@+id/about_back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:background="@android:color/transparent"
+            android:drawableStart="@drawable/back"
+            android:drawableLeft="@drawable/back"
+            android:text="Back"
+            android:textColor="@color/White" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="About"
+            android:textColor="@color/nav_item_background"
+            android:textSize="20dp" />
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Jupiter Platform"
+                android:textColor="@color/leadCentralHeader"
+                android:textSize="20dp" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="version 0.0.5"
+                android:textColor="@color/leadCentralSubtext"
+                android:textSize="16dp" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Jupiter platform app is a product of Central Station Marketing. Our app uses the same login as your Central Station Marketing admin login. Please review your user policy in CSM admin. Your privacy is important to us. Jupiter Platform App uses secured connection with Apple Developer API to connect our data. All information submitted via the app are stored at our secured Rack Space Cloud Servers."
+                android:textColor="@color/leadCentralSubtext"
+                android:textSize="14dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="What information do we collect?"
+                android:textColor="@color/leadCentralSubtext"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Your Location (based on your Internet Protocol (“IP”) address)\nMobile Device ID which is connected to user ID on our platform\nInternational mobile equipment identity (“IMEI)\nVersion of your operating system (“OS”)"
+                android:textColor="@color/leadCentralSubtext"
+                android:textSize="14dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Cookies"
+                android:textColor="@color/leadCentralSubtext"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="A cookie is a small text file that we transfer to your computer and/or device, to identify a user’s computer/device and to “remember” things about your visit, such as your preferences or a user name and password. Information contained in a cookie may be linked to your personal information, such as your user ID, for purposes such as improving the quality of our Service, tailoring recommendations to your interests, and making the service easier to use. You can disable cookies at any time, although you may not be able to access or use the features of the service.\nPlease refer to your user policy for detail privacy and terms of use."
+                android:textColor="@color/leadCentralSubtext"
+                android:textSize="14dp" />
+
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

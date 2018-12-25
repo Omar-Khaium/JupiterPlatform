@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@color/colorPrimary"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/login_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profile_image"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/jupiter" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="25dp"
+                    android:text="@string/header"
+                    android:textColor="@color/White"
+                    android:textSize="28dp" />
+
+                <EditText
+                    android:id="@+id/emailEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/pass_edit_textn_new"
+                    android:clickable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="left"
+                    android:hint="Email Address"
+                    android:inputType="textEmailAddress"
+                    android:padding="5dp"
+                    android:text=""
+                    android:textColor="@android:color/black"
+                    android:textSize="16dp" />
+
+                <EditText
+                    android:id="@+id/passwordEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/pass_edit_textn_new"
+                    android:clickable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="left"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:padding="5dp"
+                    android:text=""
+                    android:textColor="@android:color/black"
+                    android:textSize="16dp" />
+
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="30dp"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="Remember Email Address"
+                    android:textColor="@color/White"
+                    android:textSize="16dp" />
+
+                <com.suke.widget.SwitchButton
+                    android:id="@+id/switch_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="end"
+                    app:sb_background="@color/colorPrimary"
+                    app:sb_border_width="2dp"
+                    app:sb_button_color="@color/colorAccent"
+                    app:sb_checked="false"
+                    app:sb_checked_color="@color/item_background" />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/loginButtton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="51dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="51dp"
+                android:background="@drawable/buttonshape"
+                android:text="Login"
+
+                android:textAllCaps="false"
+
+                android:textColor="@color/Black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/privacyText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="0dp"
+                android:gravity="center"
+                android:text="Privacy &amp; Terms"
+                android:textColor="@color/White" />
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/login_progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
+    </RelativeLayout>
+</LinearLayout>
