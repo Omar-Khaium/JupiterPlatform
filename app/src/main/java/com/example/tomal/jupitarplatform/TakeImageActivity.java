@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 
 import okhttp3.Call;
@@ -38,13 +39,13 @@ public class TakeImageActivity extends AppCompatActivity {
     private ImageView takeImage;
     private ImageView gallerybtn;
     int flag = 0;
-    EditText photoTitleText, descriptionText;
+    EditText photoTitleText, descriptionText, locationText;
     private ImageView addPhotoBtn;
     private static final int PICK_IMAGE = 100;
     private Uri imageUri;
     Button submit;
-
-    byte[] bytes;
+    File file;
+    String path = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +64,7 @@ public class TakeImageActivity extends AppCompatActivity {
         submit = (findViewById(R.id.sendImage));
         photoTitleText = (findViewById(R.id.photoTitleText));
         descriptionText = (findViewById(R.id.descriptionText));
+        locationText = (findViewById(R.id.photoLocationText));
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -118,17 +120,17 @@ public class TakeImageActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void submitData() {
         OkHttpClient client = new OkHttpClient();
-        System.out.println(Base64.encodeToString(bytes, Base64.NO_WRAP));
-
+//        System.out.println(Base64.encodeToString(bytes, Base64.NO_WRAP));
+        MediaType MEDIA_TYPE_JPEG = MediaType.parse("image/jpeg");
         MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("leadid", LEAD_ID)
                 .addFormDataPart("file_type", "image")
                 .addFormDataPart("file_title", photoTitleText.getText().toString())
-                .addFormDataPart("file_location", "Versailles,KY")
+                .addFormDataPart("file_location", locationText.getText().toString())
                 .addFormDataPart("file_desc", descriptionText.getText().toString())
-                .addFormDataPart("ufile", Base64.encodeToString(bytes, Base64.NO_WRAP))
+                .addFormDataPart("ufile", "/storage/sdcard/Download/images-1.jpeg")
                 .build();
 
         Request request = new Request.Builder()
@@ -194,19 +196,29 @@ public class TakeImageActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
                     imageUri = data.getData();
                     takeImage.setImageURI(imageUri);
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
-                    ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 10, byteArray);
-                    bytes = byteArray.toByteArray();
+                    if (Build.VERSION.SDK_INT < 11) {
+                        path = RealPathUtils.getRealPathFromURI_BelowAPI11(TakeImageActivity.this, imageUri);
+                    } else if (Build.VERSION.SDK_INT < 19) {
+                        path = RealPathUtils.getRealPathFromURI_API11to18(TakeImageActivity.this, imageUri);
+                    } else {
+                        path = RealPathUtils.getRealPathFromURI_API19(TakeImageActivity.this, imageUri);
+                    }
+                    file = new File(path);
+//                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+//                    ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
+//                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArray);
+//                    bytes = byteArray.toByteArray();
                 }
             } else if (flag == 2) {
-                Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-                takeImage.setImageBitmap(bitmap);
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos);
-                bytes = baos.toByteArray();
-
-
+                imageUri = data.getData();
+                takeImage.setImageURI(imageUri);
+                if (Build.VERSION.SDK_INT < 11) {
+                    path = RealPathUtils.getRealPathFromURI_BelowAPI11(TakeImageActivity.this, imageUri);
+                } else if (Build.VERSION.SDK_INT < 19) {
+                    path = RealPathUtils.getRealPathFromURI_API11to18(TakeImageActivity.this, imageUri);
+                } else {
+                    path = RealPathUtils.getRealPathFromURI_API19(TakeImageActivity.this, imageUri);
+                }
             }
         } catch (Exception e) {
         }

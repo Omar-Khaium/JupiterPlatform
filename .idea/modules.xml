@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/jupiterplatform.iml" filepath="$PROJECT_DIR$/jupiterplatform.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JupiterPlatform.iml" filepath="$PROJECT_DIR$/JupiterPlatform.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
 </project>
