@@ -324,7 +324,7 @@
                     android:text="View Notes"
                     android:textColor="@color/item_background"
                     android:textStyle="bold"
-                    android:visibility="gone" />
+                    android:visibility="visible" />
             </LinearLayout>
 
 

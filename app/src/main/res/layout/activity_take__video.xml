@@ -67,7 +67,7 @@
                     android:layout_marginBottom="10dp" />
 
                 <EditText
-                    android:id="@+id/photoTitleText"
+                    android:id="@+id/TitleText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="20dp"
@@ -78,7 +78,7 @@
                     android:textSize="@dimen/takeVideoTextSize" />
 
                 <EditText
-                    android:id="@+id/photoLocationText"
+                    android:id="@+id/LocationText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="20dp"
@@ -124,9 +124,9 @@
                     android:background="@drawable/ic_library" />
 
                 <Button
+                    android:id="@+id/video_save"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
-
                     android:layout_gravity="center"
                     android:background="@drawable/send_button_shape"
                     android:gravity="center"

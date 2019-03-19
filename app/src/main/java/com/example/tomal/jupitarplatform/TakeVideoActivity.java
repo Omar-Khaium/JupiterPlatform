@@ -1,17 +1,38 @@
 package com.example.tomal.jupitarplatform;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
-import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.MediaController;
 import android.widget.Toast;
 import android.widget.VideoView;
+
+import java.io.File;
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
+import static com.example.tomal.jupitarplatform.MainActivity.COOKIE_FOR_API;
+import static com.example.tomal.jupitarplatform.MainActivity.LEAD_ID;
 
 public class TakeVideoActivity extends Activity {
     private static final int PICK_IMAGE = 123;
@@ -19,9 +40,14 @@ public class TakeVideoActivity extends Activity {
     private VideoView videoView;
     private Button gallerybtn;
     private Button addVideoBtn;
+    EditText xVideoTitle, xLocation, xDescription;
     Uri file;
     int flag = 0;
+    String path = "";
+    String selectedImagePath = "";
+    Button xSave;
     private MediaController mediaController;
+    ProgressDialog xProgress;
 
 
     @Override
@@ -35,10 +61,16 @@ public class TakeVideoActivity extends Activity {
         startService(new Intent(getApplicationContext(), BackgroundService.class));
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+        xProgress = new ProgressDialog(this);
+
         videoView = (findViewById(R.id.tookVideoView));
         gallerybtn = (findViewById(R.id.gallerybtn));
         addVideoBtn = (findViewById(R.id.addVideoBtn));
+        xVideoTitle = (findViewById(R.id.TitleText));
+        xLocation = (findViewById(R.id.LocationText));
+        xDescription = (findViewById(R.id.descriptionText));
         Button backButton = findViewById(R.id.back_button);
+        xSave = findViewById(R.id.video_save);
 
         Intent intent = getIntent();
         /*file = Uri.parse(intent.getExtras().get("VideoviewImage").toString());
@@ -61,15 +93,88 @@ public class TakeVideoActivity extends Activity {
         });
 
 
+        xSave.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+            @Override
+            public void onClick(View v) {
+                saveVideo();
+            }
+        });
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_BACK));
-                dispatchKeyEvent(new KeyEvent (KeyEvent.ACTION_UP, KeyEvent.KEYCODE_BACK));
+                dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_BACK));
             }
         });
-        openVideoCamera();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    private void saveVideo() {
+
+        xProgress.setMessage("Uploading video...");
+        xProgress.show();
+        OkHttpClient client = new OkHttpClient();
+
+        MediaType MEDIA_TYPE_PNG = MediaType.get("video/mp4");
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("leadid", LEAD_ID)
+                .addFormDataPart("file_type", "video")
+                .addFormDataPart("file_title", xVideoTitle.getText().toString())
+                .addFormDataPart("file_location", xLocation.getText().toString())
+                .addFormDataPart("file_desc", xDescription.getText().toString())
+                .addFormDataPart("ufile", path.substring(path.lastIndexOf("/")),
+                        RequestBody.create(MEDIA_TYPE_PNG, new File(path)))
+                .build();
+
+        Request request = new Request.Builder()
+                .url("https://jupiter.centralstationmarketing.com/api/ios/apifileupload.php")
+                .post(requestBody)
+                .addHeader("Cookie", COOKIE_FOR_API)
+                .addHeader("Content-Type", "application/x-www-form-urlencoded")
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+
+            Handler mainHandler = new Handler(getApplicationContext().getMainLooper());
+
+            @Override
+            public void onFailure(Call call, final IOException e) {
+
+                mainHandler.post(new Runnable() {
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                    @Override
+                    public void run() {
+                        xProgress.dismiss();
+                        Toast.makeText(TakeVideoActivity.this, "API Failed", Toast.LENGTH_SHORT).show();
+                        System.out.println(e.getMessage());
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+                final String myResponse = response.body().string();
+
+                mainHandler.post(new Runnable() {
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                    @Override
+                    public void run() {
+                        try {
+                            xProgress.dismiss();
+                            Toast.makeText(getApplicationContext(), "File Uploaded Successfully", Toast.LENGTH_SHORT).show();
+                            System.out.println(myResponse);
+
+                        } catch (Exception e) {
+                            xProgress.dismiss();
+                            Toast.makeText(TakeVideoActivity.this, "Upload error", Toast.LENGTH_SHORT).show();
+                            System.out.println(e.getMessage());
+                        }
+                    }
+                });
+            }
+        });
     }
 
     @Override
@@ -93,7 +198,6 @@ public class TakeVideoActivity extends Activity {
 
         flag = 1;
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Video.Media.INTERNAL_CONTENT_URI);
-        //flag = 1;
         startActivityForResult(gallery, PICK_IMAGE);
     }
 
@@ -102,25 +206,44 @@ public class TakeVideoActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         try {
             if (flag == 1) {
+                //Gallary
                 if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
                     Uri videoFileUri = data.getData();
+
+                    path = videoFileUri.getPath();
+
                     videoView.setVideoURI(videoFileUri);
                     videoView.setMediaController(mediaController);
                     mediaController.setAnchorView(videoView);
                     videoView.start();
                 }
             } else if (flag == 2) {
+                //Capture
                 Uri videoFileUri = data.getData();
+                path = getPath(videoFileUri);
                 videoView.setVideoURI(videoFileUri);
                 videoView.setMediaController(mediaController);
                 mediaController.setAnchorView(videoView);
                 videoView.start();
-
             }
         } catch (Exception e) {
+            System.out.print(e.getMessage());
             Toast.makeText(this, "Exception : " + e.getMessage(), Toast.LENGTH_LONG).show();
 
         }
 
+    }
+
+    private String getPath(Uri videoFileUri) {
+
+        String[] projection = {MediaStore.Video.Media.DATA};
+        Cursor cursor = getContentResolver().query(videoFileUri, projection, null, null, null);
+        if (cursor != null) {
+            int column_index = cursor
+                    .getColumnIndexOrThrow(MediaStore.Video.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        } else
+            return null;
     }
 }

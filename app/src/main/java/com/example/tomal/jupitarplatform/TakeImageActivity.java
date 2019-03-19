@@ -1,17 +1,17 @@
 package com.example.tomal.jupitarplatform;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Base64;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +19,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
@@ -32,7 +31,8 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static com.example.tomal.jupitarplatform.MainActivity.*;
+import static com.example.tomal.jupitarplatform.MainActivity.COOKIE_FOR_API;
+import static com.example.tomal.jupitarplatform.MainActivity.LEAD_ID;
 
 public class TakeImageActivity extends AppCompatActivity {
 
@@ -42,6 +42,7 @@ public class TakeImageActivity extends AppCompatActivity {
     EditText photoTitleText, descriptionText, locationText;
     private ImageView addPhotoBtn;
     private static final int PICK_IMAGE = 100;
+    private static final int TAKE_IMAGE = 101;
     private Uri imageUri;
     Button submit;
     File file;
@@ -66,7 +67,7 @@ public class TakeImageActivity extends AppCompatActivity {
         descriptionText = (findViewById(R.id.descriptionText));
         locationText = (findViewById(R.id.photoLocationText));
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -97,7 +98,7 @@ public class TakeImageActivity extends AppCompatActivity {
             }
         });
 
-        openCamera();
+
         submit.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
@@ -119,10 +120,10 @@ public class TakeImageActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void submitData() {
+
         OkHttpClient client = new OkHttpClient();
-//        System.out.println(Base64.encodeToString(bytes, Base64.NO_WRAP));
-        MediaType MEDIA_TYPE_JPEG = MediaType.parse("image/jpeg");
-        MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
+
+        MediaType MEDIA_TYPE_PNG = MediaType.get("image/png");
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("leadid", LEAD_ID)
@@ -130,7 +131,8 @@ public class TakeImageActivity extends AppCompatActivity {
                 .addFormDataPart("file_title", photoTitleText.getText().toString())
                 .addFormDataPart("file_location", locationText.getText().toString())
                 .addFormDataPart("file_desc", descriptionText.getText().toString())
-                .addFormDataPart("ufile", "/storage/sdcard/Download/images-1.jpeg")
+                .addFormDataPart("ufile", path.substring(path.lastIndexOf("/")),
+                        RequestBody.create(MEDIA_TYPE_PNG, new File(path)))
                 .build();
 
         Request request = new Request.Builder()
@@ -138,7 +140,6 @@ public class TakeImageActivity extends AppCompatActivity {
                 .post(requestBody)
                 .addHeader("Cookie", COOKIE_FOR_API)
                 .addHeader("Content-Type", "application/x-www-form-urlencoded")
-                .addHeader("cache-control", "no-cache")
                 .build();
         client.newCall(request).enqueue(new Callback() {
 
@@ -146,7 +147,7 @@ public class TakeImageActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call call, IOException e) {
-
+                System.out.println(e.getMessage());
             }
 
             @Override
@@ -158,11 +159,12 @@ public class TakeImageActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
-//                            JSONObject json = new JSONObject(myResponse);
+                            Toast.makeText(getApplicationContext(), "File Uploaded Successfully", Toast.LENGTH_SHORT).show();
                             System.out.println(myResponse);
 
                         } catch (Exception e) {
-                            e.printStackTrace();
+                            Toast.makeText(getApplicationContext(), "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                            System.out.println(e.getMessage());
                         }
                     }
                 });
@@ -174,7 +176,7 @@ public class TakeImageActivity extends AppCompatActivity {
     private void openCamera() {
         flag = 2;
         Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(camera, 1);
+        startActivityForResult(camera, TAKE_IMAGE);
     }
 
 
@@ -192,36 +194,49 @@ public class TakeImageActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         try {
 
-            if (flag == 1) {
-                if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
-                    imageUri = data.getData();
-                    takeImage.setImageURI(imageUri);
-                    if (Build.VERSION.SDK_INT < 11) {
-                        path = RealPathUtils.getRealPathFromURI_BelowAPI11(TakeImageActivity.this, imageUri);
-                    } else if (Build.VERSION.SDK_INT < 19) {
-                        path = RealPathUtils.getRealPathFromURI_API11to18(TakeImageActivity.this, imageUri);
-                    } else {
-                        path = RealPathUtils.getRealPathFromURI_API19(TakeImageActivity.this, imageUri);
-                    }
-                    file = new File(path);
-//                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
-//                    ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
-//                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArray);
-//                    bytes = byteArray.toByteArray();
-                }
-            } else if (flag == 2) {
-                imageUri = data.getData();
-                takeImage.setImageURI(imageUri);
-                if (Build.VERSION.SDK_INT < 11) {
-                    path = RealPathUtils.getRealPathFromURI_BelowAPI11(TakeImageActivity.this, imageUri);
-                } else if (Build.VERSION.SDK_INT < 19) {
-                    path = RealPathUtils.getRealPathFromURI_API11to18(TakeImageActivity.this, imageUri);
-                } else {
-                    path = RealPathUtils.getRealPathFromURI_API19(TakeImageActivity.this, imageUri);
+            if (resultCode == RESULT_OK) {
+                switch (requestCode) {
+                    case PICK_IMAGE:
+                        takeImage.setImageURI(data.getData());
+                        Cursor cursor = null;
+                        try {
+                            String[] proj = {MediaStore.Images.Media.DATA};
+                            cursor = TakeImageActivity.this.getContentResolver().query(data.getData(), proj, null, null, null);
+                            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                            cursor.moveToFirst();
+                            path = cursor.getString(column_index);
+                        } finally {
+                            if (cursor != null) {
+                                cursor.close();
+                            }
+                        }
+                    case TAKE_IMAGE:
+
+                        /*Uri imageUri=data.getData();
+                        //takeImage.setImageURI(data.getData());
+                        takeImage.setImageURI(imageUri);*/
+                        Bitmap photo = (Bitmap) data.getExtras().get("data");
+                        takeImage.setImageBitmap(photo);
+
+                        Cursor cursorTakeImage = null;
+                        try {
+                            String[] proj = {MediaStore.Images.Media.DATA};
+                            cursor = TakeImageActivity.this.getContentResolver().query(data.getData(), proj, null, null, null);
+                            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                            cursor.moveToFirst();
+                            path = cursor.getString(column_index);
+                        } finally {
+                            if (cursorTakeImage != null) {
+                                cursorTakeImage.close();
+                            }
+                        }
+
                 }
             }
         } catch (Exception e) {
+            System.out.print(e.getMessage());
         }
+
     }
 
 
