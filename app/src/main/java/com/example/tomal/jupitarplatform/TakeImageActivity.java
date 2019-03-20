@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
@@ -219,16 +220,16 @@ public class TakeImageActivity extends AppCompatActivity {
                         }
                     case TAKE_IMAGE:
 
-                        /*Uri imageUri=data.getData();
-                        //takeImage.setImageURI(data.getData());
-                        takeImage.setImageURI(imageUri);*/
                         Bitmap photo = (Bitmap) data.getExtras().get("data");
                         takeImage.setImageBitmap(photo);
-
+                        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                        photo.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                        String x = MediaStore.Images.Media.insertImage(getApplicationContext().getContentResolver(), photo, "Title", null);
+                        Uri uri =  Uri.parse(x);
                         Cursor cursorTakeImage = null;
                         try {
                             String[] proj = {MediaStore.Images.Media.DATA};
-                            cursor = TakeImageActivity.this.getContentResolver().query(data.getData(), proj, null, null, null);
+                            cursor = TakeImageActivity.this.getContentResolver().query(uri, proj, null, null, null);
                             int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
                             cursor.moveToFirst();
                             path = cursor.getString(column_index);
