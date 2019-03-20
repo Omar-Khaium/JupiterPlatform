@@ -15,10 +15,12 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
+import android.text.InputType;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -44,12 +46,15 @@ import static com.example.tomal.jupitarplatform.CentralStationLeadActivity.track
 @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
 public class MainActivity extends AppCompatActivity {
 
+    long MIN_TIME_BW_UPDATES = 1000;
+    float MIN_DISTANCE_CHANGE_FOR_UPDATEs = 50;
     LinearLayout xLayout;
     ProgressBar xProgress;
     Button loginbtn;
     EditText email;
     EditText Password;
     SwitchButton xRemember;
+    ImageView xShowPassword;
     TextView xPrivacy;
     public static String SITE_ID = "";
     public static String COMPANY_NAME = "";
@@ -99,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
         xLayout = (findViewById(R.id.login_layout));
         xProgress = (findViewById(R.id.login_progressbar));
         xPrivacy = (findViewById(R.id.privacyText));
+        xShowPassword = (findViewById(R.id.login_password_visible));
 
         if (!hasPermissions(this, PERMISSIONS)) {
             ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
@@ -128,6 +134,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), PrivacyStatementActivity.class));
+            }
+        });
+        xShowPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Password.getInputType() == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
+                    Password.setInputType(InputType.TYPE_CLASS_TEXT |
+                            InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    xShowPassword.setImageResource(R.drawable.ic_show_password);
+                } else {
+                    Password.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    xShowPassword.setImageResource(R.drawable.ic_hide_password);
+                }
+                Password.setSelection(Password.getText().length());
             }
         });
 

@@ -1,5 +1,6 @@
 package com.example.tomal.jupitarplatform;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -47,6 +48,7 @@ public class TakeImageActivity extends AppCompatActivity {
     Button submit;
     File file;
     String path = "";
+    ProgressDialog xProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +68,7 @@ public class TakeImageActivity extends AppCompatActivity {
         photoTitleText = (findViewById(R.id.photoTitleText));
         descriptionText = (findViewById(R.id.descriptionText));
         locationText = (findViewById(R.id.photoLocationText));
-
+        xProgress = new ProgressDialog(this);
         Toolbar toolbar = findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
@@ -120,7 +122,8 @@ public class TakeImageActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void submitData() {
-
+        xProgress.setMessage("Uploading Photo...");
+        xProgress.show();
         OkHttpClient client = new OkHttpClient();
 
         MediaType MEDIA_TYPE_PNG = MediaType.get("image/png");
@@ -147,6 +150,7 @@ public class TakeImageActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call call, IOException e) {
+                xProgress.dismiss();
                 System.out.println(e.getMessage());
             }
 
@@ -159,10 +163,13 @@ public class TakeImageActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
+                            xProgress.dismiss();
                             Toast.makeText(getApplicationContext(), "File Uploaded Successfully", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(), ViewMediaActivity.class));
                             System.out.println(myResponse);
 
                         } catch (Exception e) {
+                            xProgress.dismiss();
                             Toast.makeText(getApplicationContext(), "Something Went Wrong", Toast.LENGTH_SHORT).show();
                             System.out.println(e.getMessage());
                         }

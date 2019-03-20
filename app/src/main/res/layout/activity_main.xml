@@ -58,23 +58,45 @@
                     android:textColor="@android:color/black"
                     android:textSize="16dp" />
 
-                <EditText
-                    android:id="@+id/passwordEdit"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginRight="30dp"
                     android:background="@drawable/pass_edit_textn_new"
-                    android:clickable="true"
-                    android:focusableInTouchMode="true"
-                    android:gravity="left"
-                    android:hint="Password"
-                    android:inputType="textPassword"
-                    android:padding="5dp"
-                    android:text=""
-                    android:textColor="@android:color/black"
-                    android:textSize="16dp" />
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="15dp"
+                    android:padding="5dp">
+
+                    <EditText
+                        android:id="@+id/passwordEdit"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toStartOf="@+id/login_password_visible"
+                        android:layout_toLeftOf="@+id/login_password_visible"
+                        android:background="@android:color/transparent"
+                        android:clickable="true"
+                        android:focusableInTouchMode="true"
+                        android:gravity="left"
+                        android:hint="Password"
+                        android:inputType="textPassword"
+                        android:padding="5dp"
+                        android:text=""
+                        android:textColor="@android:color/black"
+                        android:textSize="16dp" />
+
+                    <ImageView
+                        android:id="@+id/login_password_visible"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:src="@drawable/ic_show_password" />
+                </RelativeLayout>
 
 
             </LinearLayout>

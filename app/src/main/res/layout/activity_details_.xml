@@ -325,6 +325,21 @@
                     android:textColor="@color/item_background"
                     android:textStyle="bold"
                     android:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/details_view_media"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:drawableStart="@drawable/ic_notes"
+                    android:drawableLeft="@drawable/ic_notes"
+                    android:drawablePadding="10dp"
+                    android:gravity="center_vertical"
+                    android:text="View Media"
+                    android:textColor="@color/item_background"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
             </LinearLayout>
 
 

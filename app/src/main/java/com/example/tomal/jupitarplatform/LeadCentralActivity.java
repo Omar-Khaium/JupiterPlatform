@@ -71,8 +71,9 @@ public class LeadCentralActivity extends AppCompatActivity {
         progressBar = (findViewById(R.id.lead_central_progressBar));
         xDataAvailability = findViewById(R.id.no_data_found);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbarText);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        TextView mTitle = toolbar.findViewById(R.id.toolbarText);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 

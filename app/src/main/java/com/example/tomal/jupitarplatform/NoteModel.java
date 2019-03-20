@@ -5,8 +5,45 @@ public class NoteModel {
     private String Name;
     private String Date;
     private String Note;
+    private String FileType;
+    private String photo;
+    private String video;
+
+    public NoteModel(String id, String name, String date, String note, String fileType, String photo, String video) {
+        Id = id;
+        Name = name;
+        Date = date;
+        Note = note;
+        FileType = fileType;
+        this.photo = photo;
+        this.video = video;
+    }
 
     public NoteModel() {
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public String getVideo() {
+        return video;
+    }
+
+    public void setVideo(String video) {
+        this.video = video;
+    }
+
+    public String getFileType() {
+        return FileType;
+    }
+
+    public void setFileType(String fileType) {
+        FileType = fileType;
     }
 
     public NoteModel(String id, String name, String date, String note) {
@@ -47,4 +84,5 @@ public class NoteModel {
     public void setNote(String note) {
         Note = note;
     }
+
 }

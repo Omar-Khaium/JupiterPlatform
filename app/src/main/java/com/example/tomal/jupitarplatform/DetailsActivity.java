@@ -53,7 +53,7 @@ public class DetailsActivity extends AppCompatActivity {
     private ImageView cameraImageView;
     private ImageView videoCameraImageView;
     private ImageView rattingImageView;
-    private TextView callTypeText, dateText, stateText, callNumber, customerViewText, toolbarSubText, xViewNotes;
+    private TextView callTypeText, dateText, stateText, callNumber, customerViewText, toolbarSubText, xViewNotes, xViewMedia;
     int flag = 0;
     TextView commentText;
     Button submitBtn;
@@ -89,6 +89,7 @@ public class DetailsActivity extends AppCompatActivity {
         dateText = (findViewById(R.id.dateText));
         noteEditText = findViewById(R.id.noteEditText);
         submitBtn = findViewById(R.id.noteSubmitBtn);
+        xViewMedia = findViewById(R.id.details_view_media);
 
         xLayout = findViewById(R.id.details_layout);
         xProgress = findViewById(R.id.details_progress_bar);
@@ -182,7 +183,7 @@ public class DetailsActivity extends AppCompatActivity {
         }
 
         dashboardProfileModel = new DashboardProfileModel();
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -241,6 +242,12 @@ public class DetailsActivity extends AppCompatActivity {
                 );
             }
         });
+        xViewMedia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), ViewMediaActivity.class));
+            }
+        });
     }
 
     @Override
@@ -280,7 +287,7 @@ public class DetailsActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onResponse(Call call, final Response response) throws IOException {
+                        public void onResponse(Call call, final Response response) {
 
                             DetailsActivity.this.runOnUiThread(new Runnable() {
                                 @Override

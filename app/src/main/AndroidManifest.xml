@@ -23,6 +23,7 @@
         android:roundIcon="@mipmap/ic_launcher_jupiter_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ViewMediaActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,7 +42,7 @@
         <activity android:name=".ViewNotesActivity" />
         <activity android:name=".PrivacyStatementActivity" />
         <activity android:name=".AboutUsActivity" />
-        <activity android:name=".NoInternetConnectionActivity"></activity>
+        <activity android:name=".NoInternetConnectionActivity" />
     </application>
 
 </manifest>

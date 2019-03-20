@@ -73,9 +73,7 @@ public class TakeVideoActivity extends Activity {
         xSave = findViewById(R.id.video_save);
 
         Intent intent = getIntent();
-        /*file = Uri.parse(intent.getExtras().get("VideoviewImage").toString());
-        videoView.setVideoURI(file);
-        videoView.start();*/
+
         mediaController = new MediaController(this);
 
         gallerybtn.setOnClickListener(new View.OnClickListener() {
@@ -164,6 +162,7 @@ public class TakeVideoActivity extends Activity {
                         try {
                             xProgress.dismiss();
                             Toast.makeText(getApplicationContext(), "File Uploaded Successfully", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(), ViewMediaActivity.class));
                             System.out.println(myResponse);
 
                         } catch (Exception e) {

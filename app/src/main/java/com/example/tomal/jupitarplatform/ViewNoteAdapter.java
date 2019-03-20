@@ -21,7 +21,6 @@ public class ViewNoteAdapter extends ArrayAdapter<NoteModel> {
         this.context = context;
         this.arrayList = array;
     }
-
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
