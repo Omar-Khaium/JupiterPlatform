@@ -13,8 +13,10 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -48,6 +50,7 @@ public class TakeVideoActivity extends Activity {
     Button xSave;
     private MediaController mediaController;
     ProgressDialog xProgress;
+    LinearLayout xLayout;
 
 
     @Override
@@ -68,6 +71,7 @@ public class TakeVideoActivity extends Activity {
         addVideoBtn = (findViewById(R.id.addVideoBtn));
         xVideoTitle = (findViewById(R.id.TitleText));
         xLocation = (findViewById(R.id.LocationText));
+        xLayout = (findViewById(R.id.layout));
         xDescription = (findViewById(R.id.descriptionText));
         Button backButton = findViewById(R.id.back_button);
         xSave = findViewById(R.id.video_save);
@@ -89,7 +93,12 @@ public class TakeVideoActivity extends Activity {
                 openVideoCamera();
             }
         });
-
+        xLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideKeyboard(v);
+            }
+        });
 
         xSave.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -244,5 +253,10 @@ public class TakeVideoActivity extends Activity {
             return cursor.getString(column_index);
         } else
             return null;
+    }
+
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }

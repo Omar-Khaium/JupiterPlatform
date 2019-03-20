@@ -1,5 +1,6 @@
 package com.example.tomal.jupitarplatform;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
@@ -15,9 +16,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -50,6 +53,7 @@ public class TakeImageActivity extends AppCompatActivity {
     File file;
     String path = "";
     ProgressDialog xProgress;
+    LinearLayout xLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +73,7 @@ public class TakeImageActivity extends AppCompatActivity {
         photoTitleText = (findViewById(R.id.photoTitleText));
         descriptionText = (findViewById(R.id.descriptionText));
         locationText = (findViewById(R.id.photoLocationText));
+        xLayout = (findViewById(R.id.layout));
         xProgress = new ProgressDialog(this);
         Toolbar toolbar = findViewById(R.id.toolbar);
 
@@ -101,6 +106,12 @@ public class TakeImageActivity extends AppCompatActivity {
             }
         });
 
+        xLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideKeyboard(v);
+            }
+        });
 
         submit.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -247,5 +258,9 @@ public class TakeImageActivity extends AppCompatActivity {
 
     }
 
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
 
 }
