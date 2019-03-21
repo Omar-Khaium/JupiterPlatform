@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/backgroundColor"
     tools:context=".TakeVideoActivity">
 
     <android.support.v7.widget.Toolbar
@@ -78,7 +79,7 @@
                     android:padding="10dp"
                     android:textSize="@dimen/takeVideoTextSize" />
 
-                <EditText
+                <TextView
                     android:id="@+id/LocationText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

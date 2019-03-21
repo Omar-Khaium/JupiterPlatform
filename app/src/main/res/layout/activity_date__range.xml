@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="#D7D6EC"
     android:gravity="center_horizontal"
+    android:background="@color/backgroundColor"
     android:orientation="vertical"
     tools:context=".DateRangeActivity">
 

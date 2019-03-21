@@ -2,16 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/central_station_lead_row_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/White"
-    android:orientation="vertical"
-    android:padding="5dp">
+    android:layout_height="wrap_content"
+    android:background="#FFFFF8"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:padding="5dp"
         android:weightSum="1">
+
 
         <LinearLayout
             android:layout_width="0dp"

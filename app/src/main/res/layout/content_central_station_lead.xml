@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/central_station_layout"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -34,8 +35,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="fill_parent">
-
+        android:layout_height="match_parent">
 
         <ListView
             android:id="@+id/listView"
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
             android:listSelector="#D9D9D9"
-            android:visibility="gone"></ListView>
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/no_data_found"
@@ -54,13 +54,9 @@
             android:text="No data found !"
             android:textSize="24dp"
             android:visibility="gone" />
-    </RelativeLayout>
 
-    <ProgressBar
-        android:id="@+id/central_station_lead_progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="center" />
+        <include layout="@layout/shimmer_row_layout" />
+    </RelativeLayout>
 
 
 </LinearLayout>

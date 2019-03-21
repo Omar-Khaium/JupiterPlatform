@@ -33,7 +33,6 @@
 
     <style name="serachView" parent="Base.Widget.AppCompat.SearchView.ActionBar">
         <!-- Customize your theme here. -->
-        <item name="searchIcon">@drawable/search_img</item>
         <item name="queryBackground">@color/White</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>

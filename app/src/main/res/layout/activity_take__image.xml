@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
     android:orientation="vertical"
     tools:context=".TakeImageActivity">
 
@@ -156,6 +157,7 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/send_button_shape"
             android:text="Send" />
+
 
         <ImageView
             android:id="@+id/addPhotoBtn"

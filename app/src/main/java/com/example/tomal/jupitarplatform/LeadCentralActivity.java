@@ -16,8 +16,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.github.clans.fab.FloatingActionButton;
@@ -53,7 +53,7 @@ public class LeadCentralActivity extends AppCompatActivity {
     private FloatingActionButton fab;
     private Button dateRangeChange;
     private Button backButton;
-    ProgressBar progressBar;
+    LinearLayout xLayout, xShimmerLayout;
     private TextView subtext, xDataAvailability;
     DashboardProfileModel dashboardProfileModel;
 
@@ -68,7 +68,8 @@ public class LeadCentralActivity extends AppCompatActivity {
         dateRangeChange = findViewById(R.id.dateRangeButton);
         backButton = findViewById(R.id.back_button);
         subtext = (findViewById(R.id.toolbarSubText));
-        progressBar = (findViewById(R.id.lead_central_progressBar));
+        xLayout = (findViewById(R.id.lead_central_layout));
+        xShimmerLayout = (findViewById(R.id.shimmer_lead_central));
         xDataAvailability = findViewById(R.id.no_data_found);
 
 
@@ -201,8 +202,9 @@ public class LeadCentralActivity extends AppCompatActivity {
                                 }
                                 centralLeadAdapter = new LeadCentralAdapter(getApplicationContext(), arrayListLeadCentral);
                                 listView.setAdapter(centralLeadAdapter);
-                                progressBar.setVisibility(View.GONE);
+                                xShimmerLayout.setVisibility(View.GONE);
                                 listView.setVisibility(View.VISIBLE);
+                                xLayout.setVisibility(View.VISIBLE);
                             }
                             if (jsonResult.length()==0){
                                 xDataAvailability.setVisibility(View.VISIBLE);
@@ -243,7 +245,7 @@ public class LeadCentralActivity extends AppCompatActivity {
                         }
                     centralLeadAdapter = new LeadCentralAdapter(LeadCentralActivity.this, arrayListLeadCentral);
                     listView.setAdapter(centralLeadAdapter);
-                    progressBar.setVisibility(View.GONE);
+                    xShimmerLayout.setVisibility(View.GONE);
                     listView.setVisibility(View.VISIBLE);
 
                 } else {
@@ -273,9 +275,8 @@ public class LeadCentralActivity extends AppCompatActivity {
         }
         centralLeadAdapter = new LeadCentralAdapter(LeadCentralActivity.this, leads);
         listView.setAdapter(centralLeadAdapter);
-        progressBar.setVisibility(View.GONE);
+        xShimmerLayout.setVisibility(View.GONE);
         listView.setVisibility(View.VISIBLE);
-
         if (leads.size()==0){
             xDataAvailability.setVisibility(View.VISIBLE);
         } else {
@@ -360,8 +361,9 @@ public class LeadCentralActivity extends AppCompatActivity {
                                 }
                                 centralLeadAdapter = new LeadCentralAdapter(getApplicationContext(), arrayListLeadCentral);
                                 listView.setAdapter(centralLeadAdapter);
-                                progressBar.setVisibility(View.GONE);
+                                xShimmerLayout.setVisibility(View.GONE);
                                 listView.setVisibility(View.VISIBLE);
+                                xLayout.setVisibility(View.VISIBLE);
                             }
                         } catch (Exception e) {
                             e.printStackTrace();

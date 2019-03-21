@@ -81,7 +81,7 @@ public class RatingActivity extends AppCompatActivity {
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         xFirstname = findViewById(R.id.xfirstname);
         xCity = findViewById(R.id.xCity);
         xState = findViewById(R.id.xState);
@@ -114,7 +114,7 @@ public class RatingActivity extends AppCompatActivity {
         Gson gson = new Gson();
         model = gson.fromJson(getIntent().getStringExtra("myjson"), LeadCentralModel.class);
 
-        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbarText);
+        TextView mTitle = toolbar.findViewById(R.id.toolbarText);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
@@ -141,7 +141,6 @@ public class RatingActivity extends AppCompatActivity {
                 }
             }
         }
-        //xCity.setText(getIntent().getStringExtra("city"));
         xCity.setText(model.getCity());
         xState.setText(model.getState());
         xZip.setText(getIntent().getStringExtra("zipCode"));
@@ -354,15 +353,10 @@ public class RatingActivity extends AppCompatActivity {
         boolean gpsStatus = Settings.Secure
                 .isLocationProviderEnabled(contentResolver,
                         LocationManager.GPS_PROVIDER);
-        if (gpsStatus) {
-            return true;
-
-        } else {
-            return false;
-        }
+        return gpsStatus;
     }
 
-    private class MyLocationListener implements LocationListener {
+    public class MyLocationListener implements LocationListener {
         @Override
         public void onLocationChanged(Location loc) {
 

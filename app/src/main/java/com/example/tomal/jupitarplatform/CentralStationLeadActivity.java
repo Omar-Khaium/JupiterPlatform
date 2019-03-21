@@ -3,6 +3,7 @@ package com.example.tomal.jupitarplatform;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
@@ -10,18 +11,16 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,7 +29,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.UUID;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -40,7 +38,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static com.example.tomal.jupitarplatform.MainActivity.*;
+import static com.example.tomal.jupitarplatform.MainActivity.COOKIE_FOR_API;
 
 public class CentralStationLeadActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -48,7 +46,7 @@ public class CentralStationLeadActivity extends AppCompatActivity
     TextView xDataAvailability;
     ArrayList<DomainModel> arrayList = new ArrayList<>();
     private CentralStationLeadAdapter adp;
-    ProgressBar progressBar;
+    LinearLayout xLayout, xShimmerLayout;
     protected static boolean trackLoginFromDashboard = false;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -57,25 +55,26 @@ public class CentralStationLeadActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_central_station_lead_);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbarText);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        TextView mTitle = toolbar.findViewById(R.id.toolbarText);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         toggle.setHomeAsUpIndicator(R.drawable.ic_menu);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         //Findings
 
         listView = findViewById(R.id.listView);
-        progressBar = (findViewById(R.id.central_station_lead_progressBar));
         xDataAvailability = findViewById(R.id.no_data_found);
+        xShimmerLayout = findViewById(R.id.shimmer_central_station_lead_row_layout);
+        xLayout = findViewById(R.id.central_station_layout);
 
         getData();
     }
@@ -132,8 +131,9 @@ public class CentralStationLeadActivity extends AppCompatActivity
                                 Collections.sort(arrayList, DomainModel.checkDomainNameComparator);
                                 adp = new CentralStationLeadAdapter(getApplicationContext(), arrayList);
                                 listView.setAdapter(adp);
-                                progressBar.setVisibility(View.GONE);
+                                xShimmerLayout.setVisibility(View.GONE);
                                 listView.setVisibility(View.VISIBLE);
+                                xLayout.setVisibility(View.VISIBLE);
                             }
                             if (jsonResult.length()==0){
                                 xDataAvailability.setVisibility(View.VISIBLE);
@@ -155,7 +155,7 @@ public class CentralStationLeadActivity extends AppCompatActivity
         trackLoginFromDashboard = true;
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
     }
 
@@ -172,7 +172,7 @@ public class CentralStationLeadActivity extends AppCompatActivity
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -197,7 +197,7 @@ public class CentralStationLeadActivity extends AppCompatActivity
             @Override
             public boolean onQueryTextChange(String s) {
 
-                progressBar.setVisibility(View.VISIBLE);
+                xShimmerLayout.setVisibility(View.VISIBLE);
                 listView.setVisibility(View.GONE);
                 if (s.isEmpty()) {
                     //getData();
@@ -208,8 +208,9 @@ public class CentralStationLeadActivity extends AppCompatActivity
                     }
                     adp = new CentralStationLeadAdapter(CentralStationLeadActivity.this, arrayList);
                     listView.setAdapter(adp);
-                    progressBar.setVisibility(View.GONE);
+                    xShimmerLayout.setVisibility(View.GONE);
                     listView.setVisibility(View.VISIBLE);
+
                 } else if (!s.isEmpty()) {
                     getSearchData(s.toLowerCase());
                 }
@@ -228,7 +229,7 @@ public class CentralStationLeadActivity extends AppCompatActivity
         }
         adp = new CentralStationLeadAdapter(CentralStationLeadActivity.this, companies);
         listView.setAdapter(adp);
-        progressBar.setVisibility(View.GONE);
+        xShimmerLayout.setVisibility(View.GONE);
         listView.setVisibility(View.VISIBLE);
 
         if (companies.size()==0){

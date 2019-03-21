@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/lead_central_layout"
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:fitsSystemWindows="true"
@@ -85,11 +86,7 @@
                 android:visibility="gone" />
         </RelativeLayout>
 
-        <ProgressBar
-            android:id="@+id/lead_central_progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center" />
+        <include layout="@layout/shimmer_lead_central_layout" />
 
         <com.github.clans.fab.FloatingActionButton
 

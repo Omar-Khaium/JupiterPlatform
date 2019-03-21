@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/media_view_layout"
+    android:background="@color/backgroundColor"
     tools:context="com.example.tomal.jupitarplatform.ViewMediaActivity">
 
     <android.support.v7.widget.Toolbar
@@ -30,16 +32,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="Media"
+                android:text="Uploaded Media"
                 android:textColor="#6cb53f" />
 
-            <TextView
-                android:id="@+id/toolbarSubText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:textColor="#6cb53f" />
 
         </LinearLayout>
 
@@ -74,6 +69,8 @@
             android:text="No data found !"
             android:textSize="24dp"
             android:visibility="gone" />
+
+        <include layout="@layout/shimmer_media_layout" />
     </RelativeLayout>
 
 

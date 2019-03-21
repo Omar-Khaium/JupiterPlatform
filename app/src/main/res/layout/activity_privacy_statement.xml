@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/White"
+    android:background="@color/backgroundColor"
     android:orientation="vertical"
     tools:context=".PrivacyStatementActivity">
 
@@ -47,7 +47,7 @@
         android:layout_height="0dp"
         android:layout_margin="15dp"
         android:layout_weight=".075"
-        android:background="@drawable/edittext"
+        android:background="@drawable/pass_edit_textn_new"
         android:backgroundTint="@color/item_background"
         android:text="OK"
         android:textSize="20dp" />

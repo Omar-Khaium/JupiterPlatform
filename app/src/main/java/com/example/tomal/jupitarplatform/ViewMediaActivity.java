@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -24,7 +25,6 @@ import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -42,7 +42,7 @@ public class ViewMediaActivity extends AppCompatActivity {
     AlertDialog.Builder alertDialog;
     AlertDialog dialog;
     private ArrayList<NoteModel> noteModels = new ArrayList<>();
-
+    LinearLayout xLayout, xShimmerLayout;
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +58,8 @@ public class ViewMediaActivity extends AppCompatActivity {
         xMediaRecycler = findViewById(R.id.media_recycler);
         xBack = findViewById(R.id.back_button);
         xNoDataFound = findViewById(R.id.no_data_found);
+        xLayout = findViewById(R.id.media_view_layout);
+        xShimmerLayout = findViewById(R.id.shimmer_media_layout);
         alertDialog = new AlertDialog.Builder(this);
         dialog = alertDialog.create();
         xMediaRecycler.setLayoutManager(new LinearLayoutManager((getApplicationContext())));
@@ -84,8 +86,6 @@ public class ViewMediaActivity extends AppCompatActivity {
     private void getData() {
 
         OkHttpClient client = new OkHttpClient();
-
-        MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
         Request request = new Request.Builder()
                 .url("https://jupiter.centralstationmarketing.com/api/ios/getfiles.php?leadid=" + LEAD_ID)
                 .get()
@@ -134,7 +134,9 @@ public class ViewMediaActivity extends AppCompatActivity {
 
                                 viewMediaAdapter = new ViewMediaAdapter(getApplicationContext(), noteModels, alertDialog, dialog);
                                 xMediaRecycler.setAdapter(viewMediaAdapter);
+                                xShimmerLayout.setVisibility(View.GONE);
                                 xMediaRecycler.setVisibility(View.VISIBLE);
+                                xLayout.setVisibility(View.VISIBLE);
 
                             }
                             if (jsonResult.length() == 0) {
