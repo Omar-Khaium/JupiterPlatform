@@ -67,9 +67,9 @@ public class LeadCentralActivity extends AppCompatActivity {
         fab = findViewById(R.id.floatingButton);
         dateRangeChange = findViewById(R.id.dateRangeButton);
         backButton = findViewById(R.id.back_button);
-        subtext = (findViewById(R.id.toolbarSubText));
-        xLayout = (findViewById(R.id.lead_central_layout));
-        xShimmerLayout = (findViewById(R.id.shimmer_lead_central));
+        subtext = findViewById(R.id.toolbarSubText);
+        xLayout = findViewById(R.id.lead_central_layout);
+        xShimmerLayout = findViewById(R.id.shimmer_lead_central_layout);
         xDataAvailability = findViewById(R.id.no_data_found);
 
 

@@ -145,11 +145,7 @@ public class TakeImageActivity extends AppCompatActivity {
         if (location == null) {
             location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         }
-        try {
-            fillAddress();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        fillAddress();
 
     }
 

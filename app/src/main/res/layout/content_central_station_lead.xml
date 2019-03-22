@@ -55,7 +55,7 @@
             android:textSize="24dp"
             android:visibility="gone" />
 
-        <include layout="@layout/shimmer_row_layout" />
+        <include layout="@layout/shimmer_central_lead_layout" />
     </RelativeLayout>
 
 
