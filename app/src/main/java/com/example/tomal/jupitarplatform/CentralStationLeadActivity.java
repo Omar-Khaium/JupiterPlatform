@@ -73,7 +73,7 @@ public class CentralStationLeadActivity extends AppCompatActivity
 
         listView = findViewById(R.id.listView);
         xDataAvailability = findViewById(R.id.no_data_found);
-        xShimmerLayout = findViewById(R.id.shimmer_central_station_lead_row_layout);
+        xShimmerLayout = findViewById(R.id.shimmer_central_station_layout);
         xLayout = findViewById(R.id.central_station_layout);
 
         getData();

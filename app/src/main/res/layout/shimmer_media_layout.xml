@@ -5,742 +5,894 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@android:color/darker_gray" />
+
     <com.facebook.shimmer.ShimmerFrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/shimmer_background">
 
-        <LinearLayout
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@color/colorShimmerBackground"
-            android:orientation="horizontal"
-            android:weightSum="1">
+            android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight=".9"
-                android:orientation="vertical">
+                android:layout_alignParentLeft="true"
+                android:layout_toStartOf="@+id/foo_1"
+                android:layout_toLeftOf="@+id/foo_1"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true">
+
+                            <View
+                                android:id="@+id/foo_11"
+                                android:layout_width="200dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/shimmer_foreground" />
+
+                            <View
+                                android:layout_width="75dp"
+                                android:layout_height="10dp"
+                                android:layout_below="@+id/foo_11"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/shimmer_foreground" />
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true">
+
+                            <View
+                                android:id="@+id/foo_21"
+                                android:layout_width="75dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/shimmer_foreground" />
+
+                        </RelativeLayout>
+                    </RelativeLayout>
 
                     <View
-                        android:layout_width="55dp"
-                        android:layout_height="14dp"
-                        android:background="@color/colorShimmerForeground" />
-
-
-                    <View
-                        android:layout_width="200dp"
-                        android:layout_height="14dp"
-                        android:layout_marginLeft="130dp"
-                        android:background="@color/colorShimmerForeground"
-                        android:gravity="right" />
+                        android:id="@+id/foo_31"
+                        android:layout_width="100dp"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/shimmer_foreground" />
                 </LinearLayout>
-
-                <View
-                    android:layout_width="40dp"
-                    android:layout_height="14dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="2dp"
-                    android:background="@color/colorShimmerForeground"
-                    android:textSize="14dp" />
-
-                <View
-                    android:layout_width="120dp"
-                    android:layout_height="14dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@color/colorShimmerForeground"
-                    android:textSize="14dp" />
             </LinearLayout>
 
-
             <View
-                android:layout_width="0dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:layout_weight=".08"
-                android:background="@color/colorShimmerForeground" />
-        </LinearLayout>
+                android:id="@+id/foo_1"
+                android:layout_width="24sp"
+                android:layout_height="24sp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/shimmer_foreground" />
+        </RelativeLayout>
     </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@android:color/darker_gray" />
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/shimmer_background">
 
-        <LinearLayout
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@color/colorShimmerBackground"
-            android:orientation="horizontal"
-            android:weightSum="1">
+            android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight=".9"
-                android:orientation="vertical">
+                android:layout_alignParentLeft="true"
+                android:layout_toStartOf="@+id/foo_a1"
+                android:layout_toLeftOf="@+id/foo_a1"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true">
+
+                            <View
+                                android:id="@+id/foo_a11"
+                                android:layout_width="200dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/shimmer_foreground" />
+
+                            <View
+                                android:layout_width="75dp"
+                                android:layout_height="10dp"
+                                android:layout_below="@+id/foo_a11"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/shimmer_foreground" />
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true">
+
+                            <View
+                                android:id="@+id/foo_a21"
+                                android:layout_width="75dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/shimmer_foreground" />
+
+                        </RelativeLayout>
+                    </RelativeLayout>
 
                     <View
-                        android:layout_width="55dp"
-                        android:layout_height="14dp"
-                        android:background="@color/colorShimmerForeground" />
-
-
-                    <View
-                        android:layout_width="200dp"
-                        android:layout_height="14dp"
-                        android:layout_marginLeft="130dp"
-                        android:background="@color/colorShimmerForeground"
-                        android:gravity="right" />
+                        android:id="@+id/foo_a31"
+                        android:layout_width="100dp"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/shimmer_foreground" />
                 </LinearLayout>
-
-                <View
-                    android:layout_width="40dp"
-                    android:layout_height="14dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="2dp"
-                    android:background="@color/colorShimmerForeground"
-                    android:textSize="14dp" />
-
-                <View
-                    android:layout_width="120dp"
-                    android:layout_height="14dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@color/colorShimmerForeground"
-                    android:textSize="14dp" />
             </LinearLayout>
 
-
             <View
-                android:layout_width="0dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:layout_weight=".08"
-                android:background="@color/colorShimmerForeground" />
-        </LinearLayout>
+                android:id="@+id/foo_a1"
+                android:layout_width="24sp"
+                android:layout_height="24sp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/shimmer_foreground" />
+        </RelativeLayout>
     </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@android:color/darker_gray" />
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/shimmer_background">
 
-        <LinearLayout
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@color/colorShimmerBackground"
-            android:orientation="horizontal"
-            android:weightSum="1">
+            android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight=".9"
-                android:orientation="vertical">
+                android:layout_alignParentLeft="true"
+                android:layout_toStartOf="@+id/foo_b1"
+                android:layout_toLeftOf="@+id/foo_b1"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true">
+
+                            <View
+                                android:id="@+id/foo_b11"
+                                android:layout_width="200dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/shimmer_foreground" />
+
+                            <View
+                                android:layout_width="75dp"
+                                android:layout_height="10dp"
+                                android:layout_below="@+id/foo_b11"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/shimmer_foreground" />
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true">
+
+                            <View
+                                android:id="@+id/foo_b21"
+                                android:layout_width="75dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/shimmer_foreground" />
+
+                        </RelativeLayout>
+                    </RelativeLayout>
 
                     <View
-                        android:layout_width="55dp"
-                        android:layout_height="14dp"
-                        android:background="@color/colorShimmerForeground" />
-
-
-                    <View
-                        android:layout_width="200dp"
-                        android:layout_height="14dp"
-                        android:layout_marginLeft="130dp"
-                        android:background="@color/colorShimmerForeground"
-                        android:gravity="right" />
+                        android:id="@+id/foo_b31"
+                        android:layout_width="100dp"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/shimmer_foreground" />
                 </LinearLayout>
-
-                <View
-                    android:layout_width="40dp"
-                    android:layout_height="14dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="2dp"
-                    android:background="@color/colorShimmerForeground"
-                    android:textSize="14dp" />
-
-                <View
-                    android:layout_width="120dp"
-                    android:layout_height="14dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@color/colorShimmerForeground"
-                    android:textSize="14dp" />
             </LinearLayout>
 
-
             <View
-                android:layout_width="0dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:layout_weight=".08"
-                android:background="@color/colorShimmerForeground" />
-        </LinearLayout>
+                android:id="@+id/foo_b1"
+                android:layout_width="24sp"
+                android:layout_height="24sp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/shimmer_foreground" />
+        </RelativeLayout>
     </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@android:color/darker_gray" />
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/shimmer_background">
 
-        <LinearLayout
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@color/colorShimmerBackground"
-            android:orientation="horizontal"
-            android:weightSum="1">
+            android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight=".9"
-                android:orientation="vertical">
+                android:layout_alignParentLeft="true"
+                android:layout_toStartOf="@+id/foo_c1"
+                android:layout_toLeftOf="@+id/foo_c1"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true">
+
+                            <View
+                                android:id="@+id/foo_c11"
+                                android:layout_width="200dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/shimmer_foreground" />
+
+                            <View
+                                android:layout_width="75dp"
+                                android:layout_height="10dp"
+                                android:layout_below="@+id/foo_c11"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/shimmer_foreground" />
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true">
+
+                            <View
+                                android:id="@+id/foo_c21"
+                                android:layout_width="75dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/shimmer_foreground" />
+
+                        </RelativeLayout>
+                    </RelativeLayout>
 
                     <View
-                        android:layout_width="55dp"
-                        android:layout_height="14dp"
-                        android:background="@color/colorShimmerForeground" />
-
-
-                    <View
-                        android:layout_width="200dp"
-                        android:layout_height="14dp"
-                        android:layout_marginLeft="130dp"
-                        android:background="@color/colorShimmerForeground"
-                        android:gravity="right" />
+                        android:id="@+id/foo_c31"
+                        android:layout_width="100dp"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/shimmer_foreground" />
                 </LinearLayout>
-
-                <View
-                    android:layout_width="40dp"
-                    android:layout_height="14dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="2dp"
-                    android:background="@color/colorShimmerForeground"
-                    android:textSize="14dp" />
-
-                <View
-                    android:layout_width="120dp"
-                    android:layout_height="14dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@color/colorShimmerForeground"
-                    android:textSize="14dp" />
             </LinearLayout>
 
-
             <View
-                android:layout_width="0dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:layout_weight=".08"
-                android:background="@color/colorShimmerForeground" />
-        </LinearLayout>
+                android:id="@+id/foo_c1"
+                android:layout_width="24sp"
+                android:layout_height="24sp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/shimmer_foreground" />
+        </RelativeLayout>
     </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@android:color/darker_gray" />
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/shimmer_background">
 
-        <LinearLayout
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@color/colorShimmerBackground"
-            android:orientation="horizontal"
-            android:weightSum="1">
+            android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight=".9"
-                android:orientation="vertical">
+                android:layout_alignParentLeft="true"
+                android:layout_toStartOf="@+id/foo_d1"
+                android:layout_toLeftOf="@+id/foo_d1"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true">
+
+                            <View
+                                android:id="@+id/foo_d11"
+                                android:layout_width="200dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/shimmer_foreground" />
+
+                            <View
+                                android:layout_width="75dp"
+                                android:layout_height="10dp"
+                                android:layout_below="@+id/foo_d11"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/shimmer_foreground" />
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true">
+
+                            <View
+                                android:id="@+id/foo_d21"
+                                android:layout_width="75dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/shimmer_foreground" />
+
+                        </RelativeLayout>
+                    </RelativeLayout>
 
                     <View
-                        android:layout_width="55dp"
-                        android:layout_height="14dp"
-                        android:background="@color/colorShimmerForeground" />
-
-
-                    <View
-                        android:layout_width="200dp"
-                        android:layout_height="14dp"
-                        android:layout_marginLeft="130dp"
-                        android:background="@color/colorShimmerForeground"
-                        android:gravity="right" />
+                        android:id="@+id/foo_d31"
+                        android:layout_width="100dp"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/shimmer_foreground" />
                 </LinearLayout>
-
-                <View
-                    android:layout_width="40dp"
-                    android:layout_height="14dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="2dp"
-                    android:background="@color/colorShimmerForeground"
-                    android:textSize="14dp" />
-
-                <View
-                    android:layout_width="120dp"
-                    android:layout_height="14dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@color/colorShimmerForeground"
-                    android:textSize="14dp" />
             </LinearLayout>
 
-
             <View
-                android:layout_width="0dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:layout_weight=".08"
-                android:background="@color/colorShimmerForeground" />
-        </LinearLayout>
+                android:id="@+id/foo_d1"
+                android:layout_width="24sp"
+                android:layout_height="24sp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/shimmer_foreground" />
+        </RelativeLayout>
     </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@android:color/darker_gray" />
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/shimmer_background">
 
-        <LinearLayout
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@color/colorShimmerBackground"
-            android:orientation="horizontal"
-            android:weightSum="1">
+            android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight=".9"
-                android:orientation="vertical">
+                android:layout_alignParentLeft="true"
+                android:layout_toStartOf="@+id/foo_e1"
+                android:layout_toLeftOf="@+id/foo_e1"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true">
+
+                            <View
+                                android:id="@+id/foo_e11"
+                                android:layout_width="200dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/shimmer_foreground" />
+
+                            <View
+                                android:layout_width="75dp"
+                                android:layout_height="10dp"
+                                android:layout_below="@+id/foo_e11"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/shimmer_foreground" />
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true">
+
+                            <View
+                                android:id="@+id/foo_e21"
+                                android:layout_width="75dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/shimmer_foreground" />
+
+                        </RelativeLayout>
+                    </RelativeLayout>
 
                     <View
-                        android:layout_width="55dp"
-                        android:layout_height="14dp"
-                        android:background="@color/colorShimmerForeground" />
-
-
-                    <View
-                        android:layout_width="200dp"
-                        android:layout_height="14dp"
-                        android:layout_marginLeft="130dp"
-                        android:background="@color/colorShimmerForeground"
-                        android:gravity="right" />
+                        android:id="@+id/foo_e31"
+                        android:layout_width="100dp"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/shimmer_foreground" />
                 </LinearLayout>
-
-                <View
-                    android:layout_width="40dp"
-                    android:layout_height="14dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="2dp"
-                    android:background="@color/colorShimmerForeground"
-                    android:textSize="14dp" />
-
-                <View
-                    android:layout_width="120dp"
-                    android:layout_height="14dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@color/colorShimmerForeground"
-                    android:textSize="14dp" />
             </LinearLayout>
 
-
             <View
-                android:layout_width="0dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:layout_weight=".08"
-                android:background="@color/colorShimmerForeground" />
-        </LinearLayout>
+                android:id="@+id/foo_e1"
+                android:layout_width="24sp"
+                android:layout_height="24sp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/shimmer_foreground" />
+        </RelativeLayout>
     </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@android:color/darker_gray" />
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/shimmer_background">
 
-        <LinearLayout
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@color/colorShimmerBackground"
-            android:orientation="horizontal"
-            android:weightSum="1">
+            android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight=".9"
-                android:orientation="vertical">
+                android:layout_alignParentLeft="true"
+                android:layout_toStartOf="@+id/foo_f1"
+                android:layout_toLeftOf="@+id/foo_f1"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true">
+
+                            <View
+                                android:id="@+id/foo_f11"
+                                android:layout_width="200dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/shimmer_foreground" />
+
+                            <View
+                                android:layout_width="75dp"
+                                android:layout_height="10dp"
+                                android:layout_below="@+id/foo_f11"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/shimmer_foreground" />
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true">
+
+                            <View
+                                android:id="@+id/foo_f21"
+                                android:layout_width="75dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/shimmer_foreground" />
+
+                        </RelativeLayout>
+                    </RelativeLayout>
 
                     <View
-                        android:layout_width="55dp"
-                        android:layout_height="14dp"
-                        android:background="@color/colorShimmerForeground" />
-
-
-                    <View
-                        android:layout_width="200dp"
-                        android:layout_height="14dp"
-                        android:layout_marginLeft="130dp"
-                        android:background="@color/colorShimmerForeground"
-                        android:gravity="right" />
+                        android:id="@+id/foo_f31"
+                        android:layout_width="100dp"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/shimmer_foreground" />
                 </LinearLayout>
-
-                <View
-                    android:layout_width="40dp"
-                    android:layout_height="14dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="2dp"
-                    android:background="@color/colorShimmerForeground"
-                    android:textSize="14dp" />
-
-                <View
-                    android:layout_width="120dp"
-                    android:layout_height="14dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@color/colorShimmerForeground"
-                    android:textSize="14dp" />
             </LinearLayout>
 
-
             <View
-                android:layout_width="0dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:layout_weight=".08"
-                android:background="@color/colorShimmerForeground" />
-        </LinearLayout>
+                android:id="@+id/foo_f1"
+                android:layout_width="24sp"
+                android:layout_height="24sp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/shimmer_foreground" />
+        </RelativeLayout>
     </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@android:color/darker_gray" />
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/shimmer_background">
 
-        <LinearLayout
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@color/colorShimmerBackground"
-            android:orientation="horizontal"
-            android:weightSum="1">
+            android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight=".9"
-                android:orientation="vertical">
+                android:layout_alignParentLeft="true"
+                android:layout_toStartOf="@+id/foo_g1"
+                android:layout_toLeftOf="@+id/foo_g1"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true">
+
+                            <View
+                                android:id="@+id/foo_g11"
+                                android:layout_width="200dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/shimmer_foreground" />
+
+                            <View
+                                android:layout_width="75dp"
+                                android:layout_height="10dp"
+                                android:layout_below="@+id/foo_g11"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/shimmer_foreground" />
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true">
+
+                            <View
+                                android:id="@+id/foo_g21"
+                                android:layout_width="75dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/shimmer_foreground" />
+
+                        </RelativeLayout>
+                    </RelativeLayout>
 
                     <View
-                        android:layout_width="55dp"
-                        android:layout_height="14dp"
-                        android:background="@color/colorShimmerForeground" />
-
-
-                    <View
-                        android:layout_width="200dp"
-                        android:layout_height="14dp"
-                        android:layout_marginLeft="130dp"
-                        android:background="@color/colorShimmerForeground"
-                        android:gravity="right" />
+                        android:id="@+id/foo_g31"
+                        android:layout_width="100dp"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/shimmer_foreground" />
                 </LinearLayout>
-
-                <View
-                    android:layout_width="40dp"
-                    android:layout_height="14dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="2dp"
-                    android:background="@color/colorShimmerForeground"
-                    android:textSize="14dp" />
-
-                <View
-                    android:layout_width="120dp"
-                    android:layout_height="14dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@color/colorShimmerForeground"
-                    android:textSize="14dp" />
             </LinearLayout>
 
-
             <View
-                android:layout_width="0dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:layout_weight=".08"
-                android:background="@color/colorShimmerForeground" />
-        </LinearLayout>
+                android:id="@+id/foo_g1"
+                android:layout_width="24sp"
+                android:layout_height="24sp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/shimmer_foreground" />
+        </RelativeLayout>
     </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@android:color/darker_gray" />
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/shimmer_background">
 
-        <LinearLayout
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@color/colorShimmerBackground"
-            android:orientation="horizontal"
-            android:weightSum="1">
+            android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight=".9"
-                android:orientation="vertical">
+                android:layout_alignParentLeft="true"
+                android:layout_toStartOf="@+id/foo_h1"
+                android:layout_toLeftOf="@+id/foo_h1"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true">
+
+                            <View
+                                android:id="@+id/foo_h11"
+                                android:layout_width="200dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/shimmer_foreground" />
+
+                            <View
+                                android:layout_width="75dp"
+                                android:layout_height="10dp"
+                                android:layout_below="@+id/foo_h11"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/shimmer_foreground" />
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true">
+
+                            <View
+                                android:id="@+id/foo_h21"
+                                android:layout_width="75dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/shimmer_foreground" />
+
+                        </RelativeLayout>
+                    </RelativeLayout>
 
                     <View
-                        android:layout_width="55dp"
-                        android:layout_height="14dp"
-                        android:background="@color/colorShimmerForeground" />
-
-
-                    <View
-                        android:layout_width="200dp"
-                        android:layout_height="14dp"
-                        android:layout_marginLeft="130dp"
-                        android:background="@color/colorShimmerForeground"
-                        android:gravity="right" />
+                        android:id="@+id/foo_h31"
+                        android:layout_width="100dp"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/shimmer_foreground" />
                 </LinearLayout>
-
-                <View
-                    android:layout_width="40dp"
-                    android:layout_height="14dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="2dp"
-                    android:background="@color/colorShimmerForeground"
-                    android:textSize="14dp" />
-
-                <View
-                    android:layout_width="120dp"
-                    android:layout_height="14dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@color/colorShimmerForeground"
-                    android:textSize="14dp" />
             </LinearLayout>
 
-
             <View
-                android:layout_width="0dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:layout_weight=".08"
-                android:background="@color/colorShimmerForeground" />
-        </LinearLayout>
+                android:id="@+id/foo_h1"
+                android:layout_width="24sp"
+                android:layout_height="24sp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/shimmer_foreground" />
+        </RelativeLayout>
     </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@android:color/darker_gray" />
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/shimmer_background">
 
-        <LinearLayout
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@color/colorShimmerBackground"
-            android:orientation="horizontal"
-            android:weightSum="1">
+            android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight=".9"
-                android:orientation="vertical">
+                android:layout_alignParentLeft="true"
+                android:layout_toStartOf="@+id/foo_i1"
+                android:layout_toLeftOf="@+id/foo_i1"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true">
+
+                            <View
+                                android:id="@+id/foo_i11"
+                                android:layout_width="200dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/shimmer_foreground" />
+
+                            <View
+                                android:layout_width="75dp"
+                                android:layout_height="10dp"
+                                android:layout_below="@+id/foo_i11"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/shimmer_foreground" />
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true">
+
+                            <View
+                                android:id="@+id/foo_i21"
+                                android:layout_width="75dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/shimmer_foreground" />
+
+                        </RelativeLayout>
+                    </RelativeLayout>
 
                     <View
-                        android:layout_width="55dp"
-                        android:layout_height="14dp"
-                        android:background="@color/colorShimmerForeground" />
-
-
-                    <View
-                        android:layout_width="200dp"
-                        android:layout_height="14dp"
-                        android:layout_marginLeft="130dp"
-                        android:background="@color/colorShimmerForeground"
-                        android:gravity="right" />
+                        android:id="@+id/foo_i31"
+                        android:layout_width="100dp"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/shimmer_foreground" />
                 </LinearLayout>
-
-                <View
-                    android:layout_width="40dp"
-                    android:layout_height="14dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="2dp"
-                    android:background="@color/colorShimmerForeground"
-                    android:textSize="14dp" />
-
-                <View
-                    android:layout_width="120dp"
-                    android:layout_height="14dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@color/colorShimmerForeground"
-                    android:textSize="14dp" />
             </LinearLayout>
 
-
             <View
-                android:layout_width="0dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:layout_weight=".08"
-                android:background="@color/colorShimmerForeground" />
-        </LinearLayout>
+                android:id="@+id/foo_i1"
+                android:layout_width="24sp"
+                android:layout_height="24sp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/shimmer_foreground" />
+        </RelativeLayout>
     </com.facebook.shimmer.ShimmerFrameLayout>
-
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@color/colorShimmerBackground"
-            android:orientation="horizontal"
-            android:weightSum="1">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".9"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
-
-                    <View
-                        android:layout_width="55dp"
-                        android:layout_height="14dp"
-                        android:background="@color/colorShimmerForeground" />
-
-
-                    <View
-                        android:layout_width="200dp"
-                        android:layout_height="14dp"
-                        android:layout_marginLeft="130dp"
-                        android:background="@color/colorShimmerForeground"
-                        android:gravity="right" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="40dp"
-                    android:layout_height="14dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="2dp"
-                    android:background="@color/colorShimmerForeground"
-                    android:textSize="14dp" />
-
-                <View
-                    android:layout_width="120dp"
-                    android:layout_height="14dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@color/colorShimmerForeground"
-                    android:textSize="14dp" />
-            </LinearLayout>
-
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:layout_weight=".08"
-                android:background="@color/colorShimmerForeground" />
-        </LinearLayout>
-    </com.facebook.shimmer.ShimmerFrameLayout>
-
 
 </LinearLayout>

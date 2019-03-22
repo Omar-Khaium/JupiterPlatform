@@ -203,7 +203,7 @@ public class TakeVideoActivity extends Activity {
                     @Override
                     public void run() {
                         xProgress.dismiss();
-                        Toast.makeText(TakeVideoActivity.this, "API Failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TakeVideoActivity.this, "API Failed with : ", Toast.LENGTH_SHORT).show();
                         System.out.println(e.getMessage());
                     }
                 });
@@ -267,7 +267,7 @@ public class TakeVideoActivity extends Activity {
                 if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
                     Uri videoFileUri = data.getData();
 
-                    path = videoFileUri.getPath();
+                    path = getPath(videoFileUri);
 
                     videoView.setVideoURI(videoFileUri);
                     videoView.setMediaController(mediaController);
