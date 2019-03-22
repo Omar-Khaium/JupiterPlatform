@@ -1,18 +1,28 @@
 package com.example.tomal.jupitarplatform;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import java.io.IOException;
 
@@ -25,7 +35,6 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import static com.example.tomal.jupitarplatform.MainActivity.COOKIE_FOR_API;
-
 import static com.example.tomal.jupitarplatform.MainActivity.SITE_ID;
 
 
@@ -35,6 +44,14 @@ public class CreateLeadActivity extends AppCompatActivity {
     EditText commentEditText;
     String Siteid;
     TextView firstNameEdit, lastNameEdit, streetEdit, cityEdit, stateEdit, zipEdit, phoneEdit, emaillEdit, commentEdit;
+
+    //----------------------------
+
+    View loadingView = null;
+    AlertDialog.Builder alert;
+    AlertDialog loadingDialog;
+
+    //----------------------------
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +73,16 @@ public class CreateLeadActivity extends AppCompatActivity {
         phoneEdit = findViewById(R.id.phoneEdit);
         emaillEdit = findViewById(R.id.emaillEdit);
         commentEdit = findViewById(R.id.commentEdit);
+
+        //------------------------------------------
+        alert = new AlertDialog.Builder(this);
+        alert.setCancelable(false);
+        loadingDialog = alert.create();
+        loadingView = LayoutInflater.from(this).inflate(R.layout.lottie_layout, new LinearLayout(this), false);
+        ImageView loadinImage = loadingView.findViewById(R.id.loading_animation);
+        Glide.with(this).asGif().load(R.drawable.ic_loading).into(loadinImage);
+        //----------------------------------------------
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,6 +116,18 @@ public class CreateLeadActivity extends AppCompatActivity {
                         && !stateEdit.getText().toString().isEmpty() && !zipEdit.getText().toString().isEmpty()
                         && !phoneEdit.getText().toString().isEmpty() && !emaillEdit.getText().toString().isEmpty()
                         && !commentEdit.getText().toString().isEmpty()) {
+
+                    alert.setView(loadingView);
+                    loadingDialog = alert.create();
+                    loadingDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    loadingDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+                            ((ViewGroup) loadingView.getParent()).removeView(loadingView);
+                        }
+                    });
+                    loadingDialog.show();
+
                     OkHttpClient client = new OkHttpClient();
 
                     MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
@@ -114,7 +153,7 @@ public class CreateLeadActivity extends AppCompatActivity {
                     client.newCall(request).enqueue(new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
-                            Toast.makeText(getApplicationContext(), "Exception occured : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            loadingDialog.dismiss();
                         }
 
                         @Override
@@ -124,14 +163,10 @@ public class CreateLeadActivity extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     try {
-                                        /*if (response.code() == 200) {
-                                            Toast.makeText(CreateLeadActivity.this, "Lead added successfully", Toast.LENGTH_SHORT).show();
-                                            // startActivity(new Intent(getApplicationContext(), CorrespondenceActivity.class).putExtra("Company ID", CompanyID));
-                                        } else {
-                                            Toast.makeText(CreateLeadActivity.this, "Error Occurred: ", Toast.LENGTH_SHORT).show();
-                                        }*/
+                                        loadingDialog.dismiss();
                                         Toast.makeText(CreateLeadActivity.this, myreponce, Toast.LENGTH_SHORT).show();
                                     } catch (Exception e) {
+                                        loadingDialog.dismiss();
                                         e.printStackTrace();
                                     }
                                 }

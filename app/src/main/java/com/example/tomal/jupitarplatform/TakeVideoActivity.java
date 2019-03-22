@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.TextView;
@@ -51,8 +52,8 @@ public class TakeVideoActivity extends Activity {
     private static final int PICK_IMAGE = 123;
     private static final int REQUEST_CAPTURE_IMAGE = 100;
     private VideoView videoView;
-    private Button gallerybtn;
-    private Button addVideoBtn;
+    private ImageView gallerybtn;
+    private ImageView addVideoBtn;
     EditText xVideoTitle, xDescription;
     TextView xLocation;
     Uri file;
@@ -145,11 +146,7 @@ public class TakeVideoActivity extends Activity {
         if (location == null) {
             location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         }
-        try {
-            fillAddress();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        fillAddress();
 
     }
 

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/ratting_layout"
     android:background="@color/backgroundColor"
     android:orientation="vertical"
     tools:context=".RatingActivity">
@@ -61,281 +62,289 @@
         android:layout_height="match_parent"
         android:fillViewport="true">
 
-        <LinearLayout
-            android:id="@+id/rLayout"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="15dp"
-            android:layout_marginBottom="20dp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:id="@+id/rLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical"
+                android:paddingLeft="15dp">
 
-                <TextView
-                    android:id="@+id/introText"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/introText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="30dp"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/rateInfo"
+                        android:textColor="@color/Black"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/numberTextview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="230-502-3245"
+                        android:textColor="@color/item_background"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="First Name and Lst Initial" />
+
+                <EditText
+                    android:id="@+id/xfirstname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginRight="30dp"
-                    android:fontFamily="sans-serif"
-                    android:text="@string/rateInfo"
-                    android:textColor="@color/Black"
+                    android:background="@drawable/pass_edit_textn_new"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:padding="5dp"
                     android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/numberTextview"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="230-502-3245"
-                    android:textColor="@color/item_background"
-                    android:textStyle="bold" />
-            </LinearLayout>
+                    android:padding="5dp"
+                    android:text="City" />
 
+                <EditText
+                    android:id="@+id/xCity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/pass_edit_textn_new"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:padding="5dp"
+                    android:textSize="15sp" />
 
-            <TextView
+                <TextView
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="First Name and Lst Initial" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="State" />
 
-            <EditText
-                android:id="@+id/xfirstname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
-                android:background="@drawable/pass_edit_textn_new"
-                android:clickable="false"
-                android:cursorVisible="false"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:padding="5dp"
-                android:textSize="15sp" />
+                <EditText
+                    android:id="@+id/xState"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/pass_edit_textn_new"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:padding="5dp"
+                    android:textSize="15sp" />
 
-            <TextView
+                <TextView
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="City" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Zip" />
 
-            <EditText
-                android:id="@+id/xCity"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
-                android:background="@drawable/pass_edit_textn_new"
-                android:clickable="false"
-                android:cursorVisible="false"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:padding="5dp"
-                android:textSize="15sp" />
+                <EditText
 
-            <TextView
+                    android:id="@+id/xZip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/pass_edit_textn_new"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:inputType="number"
+                    android:padding="5dp"
+                    android:textSize="15sp" />
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="State" />
+                <TextView
 
-            <EditText
-                android:id="@+id/xState"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
-                android:background="@drawable/pass_edit_textn_new"
-                android:clickable="false"
-                android:cursorVisible="false"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:padding="5dp"
-                android:textSize="15sp" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Comment" />
 
-            <TextView
+                <EditText
+                    android:id="@+id/xComment"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/pass_edit_textn_new"
+                    android:padding="5dp" />
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="Zip" />
+                <TextView
 
-            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="May we publish your review on our website?" />
 
-                android:id="@+id/xZip"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
-                android:background="@drawable/pass_edit_textn_new"
-                android:clickable="false"
-                android:cursorVisible="false"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:inputType="number"
-                android:padding="5dp"
-                android:textSize="15sp" />
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="Comment" />
-
-            <EditText
-                android:id="@+id/xComment"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginRight="30dp"
-                android:background="@drawable/pass_edit_textn_new"
-                android:padding="5dp" />
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="May we publish your review on our website?" />
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="25dp"
-                android:gravity="center">
-
-                <Spinner
-                    android:id="@+id/spinner"
+                <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:entries="@array/selection"
-                    android:popupBackground="@color/White" />
-            </android.support.v7.widget.CardView>
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="25dp"
+                    android:gravity="center">
 
-            <TextView
+                    <Spinner
+                        android:id="@+id/spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:entries="@array/selection"
+                        android:popupBackground="@color/White" />
+                </android.support.v7.widget.CardView>
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="How would you rate your overall satisfaction \n with your website?" />
+                <TextView
 
-            <RatingBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="How would you rate your overall satisfaction \n with your website?" />
 
-                android:id="@+id/first_ratting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:numStars="5"
-                android:theme="@style/RatingBar" />
+                <RatingBar
 
-            <TextView
+                    android:id="@+id/first_ratting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:theme="@style/RatingBar" />
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="How is your experience working with Central \n Station Marketing?" />
+                <TextView
 
-            <RatingBar
-                android:id="@+id/second_ratting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:numStars="5"
-                android:theme="@style/RatingBar" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="How is your experience working with Central \n Station Marketing?" />
 
-            <TextView
+                <RatingBar
+                    android:id="@+id/second_ratting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:theme="@style/RatingBar" />
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="How satisfied are you with the leads or \n performance of your site?" />
+                <TextView
 
-            <RatingBar
-                android:id="@+id/third_ratting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:numStars="5"
-                android:theme="@style/RatingBar" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="How satisfied are you with the leads or \n performance of your site?" />
 
-            <TextView
+                <RatingBar
+                    android:id="@+id/third_ratting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:theme="@style/RatingBar" />
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="How would you rate your knowledge of online \n marketing?" />
+                <TextView
 
-            <RatingBar
-                android:id="@+id/forth_ratting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:numStars="5"
-                android:theme="@style/RatingBar" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="How would you rate your knowledge of online \n marketing?" />
 
-            <TextView
+                <RatingBar
+                    android:id="@+id/forth_ratting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:theme="@style/RatingBar" />
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="How would you rate your the design and layout of \n your site?" />
+                <TextView
 
-            <RatingBar
-                android:id="@+id/fifth_ratting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:numStars="5"
-                android:theme="@style/RatingBar" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="How would you rate your the design and layout of \n your site?" />
 
-            <TextView
+                <RatingBar
+                    android:id="@+id/fifth_ratting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:theme="@style/RatingBar" />
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="How likely are you to recommend Central \n Station Marketing to others?" />
+                <TextView
 
-            <RatingBar
-                android:id="@+id/sixth_ratting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:numStars="5"
-                android:theme="@style/RatingBar" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="How likely are you to recommend Central \n Station Marketing to others?" />
 
-            <TextView
+                <RatingBar
+                    android:id="@+id/sixth_ratting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:theme="@style/RatingBar" />
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="What is your domain name?" />
+                <TextView
 
-            <EditText
-                android:id="@+id/domainNameEditText"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginRight="30dp"
-                android:background="@drawable/pass_edit_textn_new"
-                android:padding="5dp" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="What is your domain name?" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="10dp"
-                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/domainNameEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/pass_edit_textn_new"
+                    android:padding="5dp" />
 
-                <Button
-                    android:id="@+id/saveButton"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/send_button_shape"
-                    android:text="Save"
-                    android:textAllCaps="false"
-                    android:textColor="@color/White" />
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/saveButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/send_button_shape"
+                        android:text="Save"
+                        android:textAllCaps="false"
+                        android:textColor="@color/White" />
+                </LinearLayout>
+
             </LinearLayout>
 
-        </LinearLayout>
+            <include layout="@layout/shimmer_activity_ratting_" />
+        </RelativeLayout>
+
 
     </ScrollView>
 

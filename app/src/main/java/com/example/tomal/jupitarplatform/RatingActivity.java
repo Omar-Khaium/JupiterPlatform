@@ -2,21 +2,13 @@ package com.example.tomal.jupitarplatform;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.ContentResolver;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
+import android.os.Handler;
 import android.support.annotation.RequiresApi;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.util.Linkify;
@@ -31,11 +23,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
+import org.emptybit.help.Format;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -47,6 +40,7 @@ import okhttp3.Response;
 
 import static com.example.tomal.jupitarplatform.MainActivity.COMPANY_NAME;
 import static com.example.tomal.jupitarplatform.MainActivity.COOKIE_FOR_API;
+import static com.example.tomal.jupitarplatform.MainActivity.LEAD_ID;
 import static com.example.tomal.jupitarplatform.MainActivity.SITE_ID;
 
 
@@ -58,14 +52,9 @@ public class RatingActivity extends AppCompatActivity {
     EditText xFirstname, xState, xCity, xZip, xComment, xDomainNameEditText;
     Spinner spinner;
     RatingBar first_rating, second_rating, third_rating, forth_rating, fifth_rating, sixth_rating;
-    private String id;
-    String site_id;
     String val_new;
-    private Boolean flag = false;
-    private LocationManager locationMangaer = null;
-    private LocationListener locationListener = null;
-
     LeadCentralModel model;
+    LinearLayout xLayout, xShimmerLayout;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @SuppressLint({"WrongViewCast", "MissingPermission"})
@@ -88,6 +77,8 @@ public class RatingActivity extends AppCompatActivity {
         xZip = findViewById(R.id.xZip);
         xComment = findViewById(R.id.xComment);
         spinner = findViewById(R.id.spinner);
+        xShimmerLayout = findViewById(R.id.shimmer_ratting);
+        xLayout = findViewById(R.id.ratting_layout);
         first_rating = findViewById(R.id.first_ratting);
         second_rating = findViewById(R.id.second_ratting);
         third_rating = findViewById(R.id.third_ratting);
@@ -111,8 +102,8 @@ public class RatingActivity extends AppCompatActivity {
             }
         });
 
-        Gson gson = new Gson();
-        model = gson.fromJson(getIntent().getStringExtra("myjson"), LeadCentralModel.class);
+        /*Gson gson = new Gson();
+        model = gson.fromJson(getIntent().getStringExtra("myjson"), LeadCentralModel.class);*/
 
         TextView mTitle = toolbar.findViewById(R.id.toolbarText);
         setSupportActionBar(toolbar);
@@ -120,13 +111,13 @@ public class RatingActivity extends AppCompatActivity {
 
         subText = findViewById(R.id.toolbarSubText);
         subText.setText(COMPANY_NAME);
-        if (model.getFname().equals("") || model.getFname().equals("null") || model.getFname()==null)
+        /*if (model.getFname().equals("") || model.getFname().equals("null") || model.getFname()==null)
         {
             if (model.getLname().equals("") || model.getLname().equals("null") || model.getLname()==null){
                 xFirstname.setText("-");
             }
             else {
-                xFirstname.setText(model.getLname());
+                xFirstname.setText(Format.Text(model.getLname()));
             }
         }
         else {
@@ -143,7 +134,7 @@ public class RatingActivity extends AppCompatActivity {
         }
         xCity.setText(model.getCity());
         xState.setText(model.getState());
-        xZip.setText(getIntent().getStringExtra("zipCode"));
+        xZip.setText(getIntent().getStringExtra("zipCode"));*/
 
 //        getData();
         saveButton();
@@ -163,25 +154,7 @@ public class RatingActivity extends AppCompatActivity {
             hideKeyboard(v);
         }
     });
-//__________________________________________________________________________________________________
-
-//        locationMangaer = (LocationManager)
-//                getSystemService(Context.LOCATION_SERVICE);
-//        flag = displayGpsStatus();
-//        if (flag) {
-//
-//
-//            xCity.setText("getting location from gps.....");
-//            xCity.setEnabled(false);
-//
-//            locationListener = new MyLocationListener();
-//
-//            locationMangaer.requestLocationUpdates(LocationManager
-//                    .GPS_PROVIDER, 5000, 10, locationListener);
-//
-//        } else {
-//            alertbox("Gps Status!!", "Your GPS is: OFF");
-//        }
+        getData();
 
     }
 
@@ -239,13 +212,9 @@ public class RatingActivity extends AppCompatActivity {
                                 @Override
                                 public void run() {
                                     try {
-                                        /*if (response.code() == 200) {
-                                            Toast.makeText(RatingActivity.this, "Review Successfully Done", Toast.LENGTH_SHORT).show();
-                                            // startActivity(new Intent(getApplicationContext(), CorrespondenceActivity.class).putExtra("Company ID", CompanyID));
-                                        } else {
-                                            Toast.makeText(RatingActivity.this, "Error Occurred: ", Toast.LENGTH_SHORT).show();
-                                        }*/
-                                        Toast.makeText(RatingActivity.this, myreponce, Toast.LENGTH_SHORT).show();
+                                        if (response.code() == 200) {
+                                            Toast.makeText(RatingActivity.this, "Rating Uploaded Successfully", Toast.LENGTH_SHORT).show();
+                                        }
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
@@ -268,135 +237,59 @@ public class RatingActivity extends AppCompatActivity {
 
     }
 
-//    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-//    private void getData() {
-//        OkHttpClient client = new OkHttpClient();
-//
-//        Request request = new Request.Builder()
-//                .url("https://jupiter.centralstationmarketing.com/api/ios/getContactDetailUsingLead.php?leadid=" + LEAD_ID)
-//                .get()
-//                .addHeader("Cookie", "PHPSESSID=4l9fm2ostlkgvv85httbmbe102")
-//                .addHeader("cache-control", "no-cache")
-//                .addHeader("Postman-Token", POSTMAN_TOKEN_FOR_API"e6e84609-7cff-427e-b71d-131752e2d6d2")
-//                .build();
-//        client.newCall(request).enqueue(new Callback() {
-//
-//            Handler mainHandler = new Handler(getApplicationContext().getMainLooper());
-//
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//            }
-//
-//            @Override
-//            public void onResponse(Call call, final Response response) throws IOException {
-//                final String myResponse = response.body().string();
-//
-//                mainHandler.post(new Runnable() {
-//                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-//                    @Override
-//                    public void run() {
-//                        try {
-//                            JSONObject json = new JSONObject(myResponse);
-//                            JSONArray jsonArray = json.getJSONArray("Leads");
-//                            if (jsonArray != null) {
-//                                for (int i = 0; i < jsonArray.length(); i++) {
-//                                    JSONObject object = (JSONObject) jsonArray.get(i);
-//                                    site_id = String.valueOf(object.getInt("d_site_id"));
-//                                    xZip.setText(String.valueOf(object.getInt(("d_zip"))));
-//                                }
-//                            }
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                });
-//            }
-//        });
-//    }
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    public void getData() {
+        OkHttpClient client = new OkHttpClient();
 
+        Request request = new Request.Builder()
+                .url("https://jupiter.centralstationmarketing.com/api/ios/getContactDetailUsingLead.php?leadid=" + LEAD_ID)
+                .get()
+                .addHeader("Cookie", COOKIE_FOR_API)
+                .addHeader("cache-control", "no-cache")
+                .build();
 
-//__________________________________________________________________________________________________
+        client.newCall(request).enqueue(new Callback() {
 
-    /*----------Method to create an AlertBox ------------- */
-    protected void alertbox(String title, String mymessage) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Your Device's GPS is Disable")
-                .setCancelable(false)
-                .setTitle("** Gps Status **")
-                .setPositiveButton("Gps On",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                // finish the current activity
-                                // AlertBoxAdvance.this.finish();
-                                Intent myIntent = new Intent(
-                                        Settings.ACTION_SECURITY_SETTINGS);
-                                startActivity(myIntent);
-                                dialog.cancel();
-                            }
-                        })
-                .setNegativeButton("Cancel",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                // cancel the dialog box
-                                dialog.cancel();
-                            }
-                        });
-        AlertDialog alert = builder.create();
-        alert.show();
-    }
+            Handler mainHandler = new Handler(getApplicationContext().getMainLooper());
 
+            @Override
+            public void onFailure(Call call, IOException e) {
 
-    /*----Method to Check GPS is enable or disable ----- */
-    private Boolean displayGpsStatus() {
-        ContentResolver contentResolver = getBaseContext()
-                .getContentResolver();
-        boolean gpsStatus = Settings.Secure
-                .isLocationProviderEnabled(contentResolver,
-                        LocationManager.GPS_PROVIDER);
-        return gpsStatus;
-    }
-
-    public class MyLocationListener implements LocationListener {
-        @Override
-        public void onLocationChanged(Location loc) {
-
-            xCity.setText("");
-
-            /*----------to get City-Name from coordinates ------------- */
-            String cityName = null;
-            Geocoder gcd = new Geocoder(getBaseContext(),
-                    Locale.getDefault());
-            List<Address> addresses;
-            try {
-                addresses = gcd.getFromLocation(loc.getLatitude(), loc
-                        .getLongitude(), 1);
-                if (addresses.size() > 0)
-                    System.out.println(addresses.get(0).getLocality());
-                cityName = addresses.get(0).getLocality();
-            } catch (IOException e) {
-                e.printStackTrace();
             }
 
-            xCity.setText(cityName);
-            xCity.setEnabled(true);
-        }
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
 
-        @Override
-        public void onProviderDisabled(String provider) {
-            // TODO Auto-generated method stub
-        }
+                final String myResponse = response.body().string();
+                mainHandler.post(new Runnable() {
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                    @Override
+                    public void run() {
+                        try {
+                            JSONObject json = new JSONObject(myResponse);
+                            JSONArray jsonArray = json.getJSONArray("Leads");
+                            if (jsonArray != null) {
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                    xFirstname.setText(Format.Name(jsonObject.getString("d_fname"), jsonObject.getString("d_lname")));
+                                    xCity.setText(jsonObject.getString("d_city"));
+                                    xState.setText(jsonObject.getString("d_state"));
+                                    xZip.setText(jsonObject.getString("d_zip"));
+                                }
+                            }
+                            xLayout.setVisibility(View.VISIBLE);
+                            xShimmerLayout.setVisibility(View.GONE);
 
-        @Override
-        public void onProviderEnabled(String provider) {
-            // TODO Auto-generated method stub
-        }
-
-        @Override
-        public void onStatusChanged(String provider,
-                                    int status, Bundle extras) {
-            // TODO Auto-generated method stub
-        }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+        });
     }
+
+
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);

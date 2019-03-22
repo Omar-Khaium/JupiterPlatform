@@ -1,13 +1,12 @@
 package com.example.tomal.jupitarplatform;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 public class AboutUsActivity extends AppCompatActivity {
 
@@ -23,7 +22,7 @@ public class AboutUsActivity extends AppCompatActivity {
         startService(new Intent(getApplicationContext(), BackgroundService.class));
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.login_toolbar);
+        Toolbar toolbar = findViewById(R.id.login_toolbar);
         setSupportActionBar(toolbar);
 
         xBack= findViewById(R.id.about_back_button);

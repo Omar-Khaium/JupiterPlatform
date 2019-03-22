@@ -16,7 +16,6 @@
         android:layout_gravity="center"
         android:background="?attr/colorPrimary"
         android:gravity="center"
-
         android:minHeight="?attr/actionBarSize"
         app:titleTextColor="#6cb53f">
 
@@ -26,7 +25,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-
             android:padding="8dp"
             android:text="Take Video"
             android:textColor="#6cb53f" />
@@ -44,106 +42,99 @@
             android:textColor="@color/White" />
     </android.support.v7.widget.Toolbar>
 
-    <ScrollView
+
+    <LinearLayout
+        android:id="@+id/layout"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="0dp"
+        android:layout_weight=".9"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/layout"
+        <VideoView
+            android:id="@+id/tookVideoView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="160dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/placeholder" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+        <EditText
+            android:id="@+id/TitleText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/pass_edit_textn_new"
+            android:hint="Video Titile"
+            android:padding="10dp"
+            android:textSize="14dp" />
 
-                <VideoView
-                    android:id="@+id/tookVideoView"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
+        <TextView
+            android:id="@+id/LocationText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/pass_edit_textn_new"
+            android:hint="@string/location_hint"
+            android:padding="10dp"
+            android:textSize="14dp" />
 
-                    android:layout_gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="10dp" />
+        <EditText
+            android:id="@+id/descriptionText"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/pass_edit_textn_new"
+            android:gravity="left"
+            android:hint="@string/description_hint"
+            android:padding="10dp"
+            android:textSize="14dp" />
+    </LinearLayout>
 
-                <EditText
-                    android:id="@+id/TitleText"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/pass_edit_textn_new"
-                    android:hint="Video Title"
-                    android:padding="10dp"
-                    android:textSize="@dimen/takeVideoTextSize" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="end"
+        android:layout_weight=".1">
 
-                <TextView
-                    android:id="@+id/LocationText"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/pass_edit_textn_new"
-                    android:padding="10dp"
-                    android:textSize="@dimen/takeVideoTextSize" />
+        <ImageView
+            android:id="@+id/gallerybtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@android:color/transparent"
+            android:paddingLeft="10dp"
+            android:src="@drawable/ic_library" />
 
-                <EditText
-                    android:id="@+id/descriptionText"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/pass_edit_textn_new"
-                    android:gravity="left"
-                    android:hint="Description"
-                    android:padding="10dp"
-                    android:textSize="@dimen/takeVideoTextSize" />
+        <Button
+            android:id="@+id/video_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/send_button_shape"
+            android:text="Send" />
 
 
-            </LinearLayout>
+        <ImageView
+            android:id="@+id/addVideoBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@android:color/transparent"
+            android:paddingRight="10dp"
+            android:src="@drawable/ic_camera" />
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/layout_shape"
-                android:gravity="bottom"
-                android:orientation="horizontal"
-                android:padding="2dp">
 
-                <Button
-                    android:id="@+id/gallerybtn"
-                    android:layout_width="46dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:background="@drawable/ic_library" />
-
-                <Button
-                    android:id="@+id/video_save"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/send_button_shape"
-                    android:gravity="center"
-                    android:text="Send"
-                    android:textColor="@color/White" />
-
-                <Button
-                    android:id="@+id/addVideoBtn"
-                    android:layout_width="46dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:background="@drawable/add_photo_ic"
-
-                    />
-            </FrameLayout>
-        </LinearLayout>
-    </ScrollView>
+    </RelativeLayout>
 </LinearLayout>

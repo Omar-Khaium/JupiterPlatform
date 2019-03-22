@@ -67,17 +67,19 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:textSize="14dp"
             android:background="@drawable/pass_edit_textn_new"
             android:hint="@string/photo_hint"
             android:padding="10dp" />
 
-        <EditText
+        <TextView
             android:id="@+id/photoLocationText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
+            android:textSize="14dp"
             android:background="@drawable/pass_edit_textn_new"
             android:hint="@string/location_hint"
             android:padding="10dp" />
@@ -89,48 +91,12 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
+            android:padding="10dp"
             android:background="@drawable/pass_edit_textn_new"
             android:gravity="left"
             android:hint="@string/description_hint"
-            android:padding="10dp"
-            android:textSize="17sp" />
+            android:textSize="14dp" />
     </LinearLayout>
-
-    <!--<RelativeLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:orientation="horizontal"-->
-    <!--android:gravity="bottom"-->
-    <!--android:layout_marginTop="10dp"-->
-    <!--android:layout_gravity="bottom"-->
-    <!--android:layout_marginLeft="10dp"-->
-    <!--android:layout_marginRight="10dp"-->
-    <!--android:background="@drawable/layout_shape"-->
-    <!--android:padding="2dp">-->
-
-    <!--<Button-->
-    <!--android:id="@+id/gallerybtn"-->
-    <!--android:layout_width="40dp"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="left|start"-->
-    <!--android:background="@drawable/memory_ic"-->
-    <!--/>-->
-    <!--<Button-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:id="@+id/sendImage"-->
-    <!--android:layout_centerHorizontal="true"-->
-    <!--android:text="Send"-->
-    <!--android:background="@drawable/send_button_shape"-->
-    <!--/>-->
-
-    <!--<Button-->
-    <!--android:id="@+id/addPhotoBtn"-->
-    <!--android:layout_width="40dp"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_alignParentRight="true"-->
-    <!--android:background="@drawable/ic_add_a_photo_black_24dp" />-->
-    <!--</RelativeLayout>-->
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -29,6 +29,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -53,7 +54,8 @@ public class TakeImageActivity extends AppCompatActivity {
     private ImageView takeImage;
     private ImageView gallerybtn;
     int flag = 0;
-    EditText photoTitleText, descriptionText, locationText;
+    EditText photoTitleText, descriptionText;
+    TextView locationText;
     private ImageView addPhotoBtn;
     private static final int PICK_IMAGE = 100;
     private static final int TAKE_IMAGE = 101;
@@ -145,11 +147,7 @@ public class TakeImageActivity extends AppCompatActivity {
         if (location == null) {
             location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         }
-        try {
-            fillAddress();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        fillAddress();
 
     }
 

@@ -214,9 +214,7 @@ public class DetailsActivity extends AppCompatActivity {
         rattingImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                xDialog.setMessage("Fetching data...");
-                xDialog.show();
-                getData();
+                startActivity(new Intent(getApplicationContext(), RatingActivity.class));
             }
         });
         callNumber.setLinkTextColor(Color.parseColor("#6cb53f"));
