@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/backgroundColor"
+    android:orientation="vertical"
     tools:context=".ViewNotesActivity">
 
 
@@ -25,6 +25,15 @@
             android:minHeight="?attr/actionBarSize"
             app:titleTextColor="#6cb53f">
 
+            <TextView
+                android:id="@+id/toolbarText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Note"
+                android:textColor="#6cb53f" />
+
             <Button
                 android:id="@+id/back_button"
                 android:layout_width="wrap_content"
@@ -39,10 +48,26 @@
         </android.support.v7.widget.Toolbar>
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/view_notes_list"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible" />
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/note_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/view_notes_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone" />
+
+            <include layout="@layout/shimmer_view_note_row_layout" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
 
 </LinearLayout>

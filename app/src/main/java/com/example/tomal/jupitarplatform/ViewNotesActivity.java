@@ -2,17 +2,18 @@ package com.example.tomal.jupitarplatform;
 
 import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.RequiresApi;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
-import android.widget.ProgressBar;
+import android.widget.LinearLayout;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -22,8 +23,10 @@ import java.util.ArrayList;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 import static com.example.tomal.jupitarplatform.MainActivity.COOKIE_FOR_API;
@@ -35,6 +38,9 @@ public class ViewNotesActivity extends AppCompatActivity {
     //ProgressBar xProgressBar;
     ViewNoteAdapter adapter;
     ArrayList<NoteModel> noteModels = new ArrayList<>();
+    LinearLayout xLayout, xShimmerLayout;
+    AlertDialog.Builder previewDialog;
+    AlertDialog dialog;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
@@ -48,12 +54,18 @@ public class ViewNotesActivity extends AppCompatActivity {
         startService(new Intent(getApplicationContext(), BackgroundService.class));
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
 
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         xListView = findViewById(R.id.view_notes_list);
+        xLayout = findViewById(R.id.note_layout);
+        xShimmerLayout = findViewById(R.id.shimmer_note);
+        previewDialog = new AlertDialog.Builder(this);
+        dialog = previewDialog.create();
+        xListView.setLayoutManager(new LinearLayoutManager(this));
 
         Button backButton = findViewById(R.id.back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -81,11 +93,13 @@ public class ViewNotesActivity extends AppCompatActivity {
     private void getData() {
 
         OkHttpClient client = new OkHttpClient();
+
+        MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
+        RequestBody body = RequestBody.create(mediaType, "leadid=" + LEAD_ID);
         Request request = new Request.Builder()
                 .url("https://jupiter.centralstationmarketing.com/api/getnotes.php")
-                .get()
+                .post(body)
                 .addHeader("Cookie", COOKIE_FOR_API)
-                .addHeader("leadid", LEAD_ID)
                 .addHeader("Content-Type", "application/x-www-form-urlencoded")
                 .addHeader("cache-control", "no-cache")
                 .build();
@@ -111,23 +125,22 @@ public class ViewNotesActivity extends AppCompatActivity {
                             System.out.println(json.toString());
                             JSONArray jsonResult = json.getJSONArray("Notes");
                             if (jsonResult != null) {
-                               // xNoDataFound.setVisibility(View.GONE);
-                                for (int i = jsonResult.length() - 1; i >= 0; i--) {
+                                // xNoDataFound.setVisibility(View.GONE);
+                                noteModels.clear();
+                                for (int i = 0; i < jsonResult.length(); i++) {
                                     JSONObject jsonObject = jsonResult.getJSONObject(i);
-
                                     noteModels.add(new NoteModel(
-                                                    jsonObject.getString("id"),
-                                                    jsonObject.getString("u_fullname"),
-                                                    jsonObject.getString("timestamp"),
-                                                    jsonObject.getString("comment")
-
-                                            )
-
-                                    );
+                                            jsonObject.getString("id"),
+                                            jsonObject.getString("u_fullname"),
+                                            jsonObject.getString("timestamp"),
+                                            jsonObject.getString("comment")));
                                 }
 
-                                adapter = new ViewNoteAdapter(getApplicationContext(), noteModels);
+                                adapter = new ViewNoteAdapter(getApplicationContext(), noteModels, previewDialog, dialog);
                                 xListView.setAdapter(adapter);
+                                xShimmerLayout.setVisibility(View.GONE);
+                                xListView.setVisibility(View.VISIBLE);
+                                xLayout.setVisibility(View.VISIBLE);
 
                             }
                         } catch (Exception e) {

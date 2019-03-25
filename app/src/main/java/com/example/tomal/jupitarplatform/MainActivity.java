@@ -3,10 +3,14 @@ package com.example.tomal.jupitarplatform;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,13 +20,14 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.text.InputType;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
     long MIN_TIME_BW_UPDATES = 1000;
     float MIN_DISTANCE_CHANGE_FOR_UPDATEs = 50;
     LinearLayout xLayout;
-    ProgressBar xProgress;
     Button loginbtn;
     EditText email;
     EditText Password;
@@ -65,7 +69,9 @@ public class MainActivity extends AppCompatActivity {
     static boolean fromDateRange = false;
     public static String COOKIE_FOR_API = "";
     public static final String DEVICE_TOKEN = "APA91bFDhsk59EK7er9r5XM-6s1hWjMK0WKIp2hZchQsnzVlPQwdWoqQe4Thxm2p_dhzeI-2omZMepaSffJgAgYhaZpOQQzLi8JTwOOxUNuu3QTrsdV3ASiHhfSrcLtr0gJ1xL7LwMVPP2636W2HY1um3963A0-0-g";
-
+    View loadingView = null;
+    AlertDialog.Builder alert;
+    AlertDialog loadingDialog;
 
     String[] PERMISSIONS = {
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -102,9 +108,15 @@ public class MainActivity extends AppCompatActivity {
         Password = (findViewById(R.id.passwordEdit));
         xRemember = (findViewById(R.id.switch_button));
         xLayout = (findViewById(R.id.login_layout));
-        xProgress = (findViewById(R.id.login_progressbar));
         xPrivacy = (findViewById(R.id.privacyText));
         xShowPassword = (findViewById(R.id.login_password_visible));
+
+        //------------------------------------------
+        alert = new AlertDialog.Builder(this);
+        alert.setCancelable(false);
+        loadingDialog = alert.create();
+        loadingView = LayoutInflater.from(this).inflate(R.layout.lottie_layout, new LinearLayout(this), false);
+        //----------------------------------------------
 
         if (!hasPermissions(this, PERMISSIONS)) {
             ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
@@ -178,7 +190,16 @@ public class MainActivity extends AppCompatActivity {
                 xRemember.setEnabled(false);
                 loginbtn.setEnabled(false);
                 xLayout.setVisibility(View.GONE);
-                xProgress.setVisibility(View.VISIBLE);
+                alert.setView(loadingView);
+                loadingDialog = alert.create();
+                loadingDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                loadingDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        ((ViewGroup) loadingView.getParent()).removeView(loadingView);
+                    }
+                });
+                loadingDialog.show();
                 OkHttpClient client = new OkHttpClient();
                 MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
                 RequestBody body = RequestBody.create(mediaType, "Authorization=&userid=" + email.getText().toString() + "&password=" + Password.getText().toString() + "&Content-Type=application%2Fx-www-form-urlencode&device_token=" + DEVICE_TOKEN +
@@ -200,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 xLayout.setVisibility(View.VISIBLE);
-                                xProgress.setVisibility(View.GONE);
+                                loadingDialog.dismiss();
                                 Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
 
                             }
@@ -219,6 +240,7 @@ public class MainActivity extends AppCompatActivity {
                                     COOKIE_FOR_API =  response.header("Set-Cookie").substring(0, response.header("Set-Cookie").indexOf(";"));
 
                                     if (json.getBoolean("Login")) {
+                                        loadingDialog.dismiss();
                                         startActivity(new Intent(MainActivity.this, CentralStationLeadActivity.class));
 
 
@@ -229,7 +251,7 @@ public class MainActivity extends AppCompatActivity {
                                         xRemember.setEnabled(true);
                                         loginbtn.setEnabled(true);
                                         xLayout.setVisibility(View.VISIBLE);
-                                        xProgress.setVisibility(View.GONE);
+                                        loadingDialog.dismiss();
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -238,7 +260,7 @@ public class MainActivity extends AppCompatActivity {
                                     xRemember.setEnabled(true);
                                     loginbtn.setEnabled(true);
                                     xLayout.setVisibility(View.VISIBLE);
-                                    xProgress.setVisibility(View.GONE);
+                                    loadingDialog.dismiss();
                                 }
                             }
                         });
@@ -263,7 +285,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void Login() {
         xLayout.setVisibility(View.GONE);
-        xProgress.setVisibility(View.VISIBLE);
+        alert.setView(loadingView);
+        loadingDialog = alert.create();
+        loadingDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        loadingDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                ((ViewGroup) loadingView.getParent()).removeView(loadingView);
+            }
+        });
+        loadingDialog.show();
 
         OkHttpClient client = new OkHttpClient();
         MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
@@ -286,7 +317,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-
+                        loadingDialog.dismiss();
                     }
                 });
             }
@@ -307,12 +338,12 @@ public class MainActivity extends AppCompatActivity {
                             } else {
                                 Toast.makeText(MainActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
                                 xLayout.setVisibility(View.VISIBLE);
-                                xProgress.setVisibility(View.GONE);
+                                loadingDialog.dismiss();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                             xLayout.setVisibility(View.VISIBLE);
-                            xProgress.setVisibility(View.GONE);
+                            loadingDialog.dismiss();
                         }
                     }
                 });

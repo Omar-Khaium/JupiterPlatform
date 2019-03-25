@@ -17,12 +17,9 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
 
 import java.io.IOException;
 
@@ -45,6 +42,7 @@ public class CreateLeadActivity extends AppCompatActivity {
     String Siteid;
     TextView firstNameEdit, lastNameEdit, streetEdit, cityEdit, stateEdit, zipEdit, phoneEdit, emaillEdit, commentEdit;
 
+    LinearLayout xLayout;
     //----------------------------
 
     View loadingView = null;
@@ -73,14 +71,13 @@ public class CreateLeadActivity extends AppCompatActivity {
         phoneEdit = findViewById(R.id.phoneEdit);
         emaillEdit = findViewById(R.id.emaillEdit);
         commentEdit = findViewById(R.id.commentEdit);
+        xLayout = findViewById(R.id.xLayout);
 
         //------------------------------------------
         alert = new AlertDialog.Builder(this);
         alert.setCancelable(false);
         loadingDialog = alert.create();
         loadingView = LayoutInflater.from(this).inflate(R.layout.lottie_layout, new LinearLayout(this), false);
-        ImageView loadinImage = loadingView.findViewById(R.id.loading_animation);
-        Glide.with(this).asGif().load(R.drawable.ic_loading).into(loadinImage);
         //----------------------------------------------
 
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -88,6 +85,12 @@ public class CreateLeadActivity extends AppCompatActivity {
             public void onClick(View v) {
                 dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_BACK));
                 dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_BACK));
+            }
+        });
+        xLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideKeyboard(v);
             }
         });
 
@@ -164,7 +167,8 @@ public class CreateLeadActivity extends AppCompatActivity {
                                 public void run() {
                                     try {
                                         loadingDialog.dismiss();
-                                        Toast.makeText(CreateLeadActivity.this, myreponce, Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(CreateLeadActivity.this, "Lead Created Successfully", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(getApplicationContext(), LeadCentralActivity.class));
                                     } catch (Exception e) {
                                         loadingDialog.dismiss();
                                         e.printStackTrace();

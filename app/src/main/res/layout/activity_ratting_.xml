@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/ratting_layout"
     android:background="@color/backgroundColor"
     android:orientation="vertical"
     tools:context=".RatingActivity">
@@ -67,12 +66,13 @@
             android:layout_height="wrap_content">
 
             <LinearLayout
-                android:id="@+id/rLayout"
+                android:id="@+id/ratting_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="20dp"
                 android:orientation="vertical"
-                android:paddingLeft="15dp">
+                android:paddingLeft="15dp"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="wrap_content"

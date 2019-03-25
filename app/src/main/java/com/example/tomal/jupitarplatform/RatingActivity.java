@@ -254,7 +254,8 @@ public class RatingActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call call, IOException e) {
-
+                xLayout.setVisibility(View.VISIBLE);
+                xShimmerLayout.setVisibility(View.GONE);
             }
 
             @Override
@@ -281,6 +282,8 @@ public class RatingActivity extends AppCompatActivity {
                             xShimmerLayout.setVisibility(View.GONE);
 
                         } catch (JSONException e) {
+                            xLayout.setVisibility(View.VISIBLE);
+                            xShimmerLayout.setVisibility(View.GONE);
                             e.printStackTrace();
                         }
                     }

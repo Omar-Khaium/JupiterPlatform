@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -25,10 +24,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -293,7 +288,7 @@ public class DetailsActivity extends AppCompatActivity {
                                     try {
                                         if (response.code() == 200) {
                                             Toast.makeText(DetailsActivity.this, "Note Added Successfully", Toast.LENGTH_SHORT).show();
-                                            // startActivity(new Intent(getApplicationContext(), CorrespondenceActivity.class).putExtra("Company ID", CompanyID));
+                                            startActivity(new Intent(getApplicationContext(), ViewNotesActivity.class));
                                         } else {
                                             Toast.makeText(DetailsActivity.this, "Error Occurred: ", Toast.LENGTH_SHORT).show();
                                         }
@@ -314,56 +309,6 @@ public class DetailsActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    public void getData() {
-//        xLayout.setVisibility(View.GONE);
-//        xProgress.setVisibility(View.VISIBLE);
-        OkHttpClient client = new OkHttpClient();
-
-        Request request = new Request.Builder()
-                .url("https://jupiter.centralstationmarketing.com/api/ios/getContactDetailUsingLead.php?leadid=" + LEAD_ID)
-                .get()
-                .addHeader("Cookie", COOKIE_FOR_API)
-                .addHeader("cache-control", "no-cache")
-                .build();
-
-        client.newCall(request).enqueue(new Callback() {
-
-            Handler mainHandler = new Handler(getApplicationContext().getMainLooper());
-
-            @Override
-            public void onFailure(Call call, IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(Call call, final Response response) throws IOException {
-
-                final String myResponse = response.body().string();
-                mainHandler.post(new Runnable() {
-                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-                    @Override
-                    public void run() {
-                        try {
-                            JSONObject json = new JSONObject(myResponse);
-                            JSONArray jsonArray = json.getJSONArray("Leads");
-                            JSONObject zipObject = jsonArray.getJSONObject(0);
-                            Gson gson = new Gson();
-                            String myJson = gson.toJson(model);
-                            startActivity(new Intent(getApplicationContext(), RatingActivity.class)
-                                    .putExtra("zipCode", zipObject.getString("d_zip"))
-                                    .putExtra("myjson", myJson)
-                            );
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-            }
-        });
     }
 
     public void hideKeyboard(View view) {
