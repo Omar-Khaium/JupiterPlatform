@@ -1,9 +1,13 @@
 package com.example.tomal.jupitarplatform;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,7 +17,9 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,6 +34,7 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Objects;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -49,7 +56,6 @@ public class DetailsActivity extends AppCompatActivity {
     private ImageView videoCameraImageView;
     private ImageView rattingImageView;
     private TextView callTypeText, dateText, stateText, callNumber, customerViewText, toolbarSubText, xViewNotes, xViewMedia;
-    int flag = 0;
     TextView commentText;
     Button submitBtn;
     EditText noteEditText;
@@ -60,6 +66,11 @@ public class DetailsActivity extends AppCompatActivity {
 
     LeadCentralModel model;
 
+    View loadingView = null;
+    AlertDialog.Builder alert;
+    AlertDialog loadingDialog;
+
+    @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,9 +97,16 @@ public class DetailsActivity extends AppCompatActivity {
         submitBtn = findViewById(R.id.noteSubmitBtn);
         xViewMedia = findViewById(R.id.details_view_media);
 
+        //------------------------------------------
+        alert = new AlertDialog.Builder(this);
+        alert.setCancelable(false);
+        loadingDialog = alert.create();
+        loadingView = LayoutInflater.from(this).inflate(R.layout.save_lottie_layout, new LinearLayout(this), false);
+        //----------------------------------------------
+
         xLayout = findViewById(R.id.details_layout);
         xProgress = findViewById(R.id.details_progress_bar);
-        submitButton();
+
 
         toolbarSubText.setText(COMPANY_NAME);
         noteEditText.addTextChangedListener(new TextWatcher() {
@@ -163,8 +181,8 @@ public class DetailsActivity extends AppCompatActivity {
         if (model.getTimestamp().equals("null") || model.getTimestamp().equals("") || model.getTimestamp() == null) {
             dateText.setText("-");
         } else {
-            SimpleDateFormat fromUser = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-            SimpleDateFormat myCreated = new SimpleDateFormat("dd MMM, yyyy hh:mm:ss a");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat fromUser = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat myCreated = new SimpleDateFormat("dd MMM, yyyy hh:mm:ss a");
             try {
                 dateText.setText(myCreated.format(fromUser.parse(model.getTimestamp())));
             } catch (ParseException e) {
@@ -181,7 +199,7 @@ public class DetailsActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
         Button backButton = findViewById(R.id.back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -241,6 +259,12 @@ public class DetailsActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), ViewMediaActivity.class));
             }
         });
+        submitBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                submitButton();
+            }
+        });
     }
 
     @Override
@@ -254,8 +278,19 @@ public class DetailsActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onClick(View v) {
+                submitBtn.setEnabled(false);
 
                 if (!noteEditText.getText().toString().isEmpty()) {
+                    alert.setView(loadingView);
+                    loadingDialog = alert.create();
+                    Objects.requireNonNull(loadingDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    loadingDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+                            ((ViewGroup) loadingView.getParent()).removeView(loadingView);
+                        }
+                    });
+                    loadingDialog.show();
                     OkHttpClient client = new OkHttpClient();
 
                     MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
@@ -276,7 +311,9 @@ public class DetailsActivity extends AppCompatActivity {
                     client.newCall(request).enqueue(new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
-                            Toast.makeText(getApplicationContext(), "Exception occured : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            submitBtn.setEnabled(true);
+                            loadingDialog.dismiss();
+                            Toast.makeText(getApplicationContext(), "Something went wrong...", Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
@@ -287,12 +324,15 @@ public class DetailsActivity extends AppCompatActivity {
                                 public void run() {
                                     try {
                                         if (response.code() == 200) {
-                                            Toast.makeText(DetailsActivity.this, "Note Added Successfully", Toast.LENGTH_SHORT).show();
+                                            submitBtn.setEnabled(true);
+                                            loadingDialog.dismiss();
                                             startActivity(new Intent(getApplicationContext(), ViewNotesActivity.class));
                                         } else {
-                                            Toast.makeText(DetailsActivity.this, "Error Occurred: ", Toast.LENGTH_SHORT).show();
+                                            submitBtn.setEnabled(true);
+                                            Toast.makeText(DetailsActivity.this, "Something went wrong...", Toast.LENGTH_SHORT).show();
                                         }
                                     } catch (Exception e) {
+                                        loadingDialog.dismiss();
                                         e.printStackTrace();
                                     }
                                 }
@@ -312,7 +352,7 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     public void hideKeyboard(View view) {
-        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }

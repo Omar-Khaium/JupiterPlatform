@@ -285,7 +285,7 @@ public class TakeVideoActivity extends Activity {
             }
         } catch (Exception e) {
             System.out.print(e.getMessage());
-            Toast.makeText(this, "Exception : " + e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Something Went Wrong...", Toast.LENGTH_LONG).show();
 
         }
 

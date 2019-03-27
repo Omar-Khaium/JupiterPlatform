@@ -32,6 +32,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="Note"
+                android:textSize="16dp"
                 android:textColor="#6cb53f" />
 
             <Button
@@ -50,23 +51,39 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/note_layout"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/view_notes_list"
+            <LinearLayout
+                android:id="@+id/note_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/view_notes_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/no_data_found"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="No data found !"
+                android:textSize="24dp"
                 android:visibility="gone" />
+        </RelativeLayout>
 
-            <include layout="@layout/shimmer_view_note_row_layout" />
-        </LinearLayout>
-
+        <include layout="@layout/shimmer_view_note_row_layout" />
     </RelativeLayout>
 
 

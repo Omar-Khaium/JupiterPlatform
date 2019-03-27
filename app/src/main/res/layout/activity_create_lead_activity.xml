@@ -28,10 +28,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-
             android:padding="8dp"
             android:text="Create Lead"
-            android:textColor="@color/White" />
+            android:textColor="#6cb53f"
+            android:textSize="16dp" />
 
         <Button
             android:id="@+id/back_button"

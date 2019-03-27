@@ -14,6 +14,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -41,6 +42,7 @@ public class ViewNotesActivity extends AppCompatActivity {
     LinearLayout xLayout, xShimmerLayout;
     AlertDialog.Builder previewDialog;
     AlertDialog dialog;
+    TextView xNoDataFound;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
@@ -63,6 +65,7 @@ public class ViewNotesActivity extends AppCompatActivity {
         xListView = findViewById(R.id.view_notes_list);
         xLayout = findViewById(R.id.note_layout);
         xShimmerLayout = findViewById(R.id.shimmer_note);
+        xNoDataFound = findViewById(R.id.no_data_found);
         previewDialog = new AlertDialog.Builder(this);
         dialog = previewDialog.create();
         xListView.setLayoutManager(new LinearLayoutManager(this));
@@ -125,9 +128,9 @@ public class ViewNotesActivity extends AppCompatActivity {
                             System.out.println(json.toString());
                             JSONArray jsonResult = json.getJSONArray("Notes");
                             if (jsonResult != null) {
-                                // xNoDataFound.setVisibility(View.GONE);
+                                xNoDataFound.setVisibility(View.GONE);
                                 noteModels.clear();
-                                for (int i = 0; i < jsonResult.length(); i++) {
+                                for (int i = jsonResult.length() - 1; i >= 0; i--) {
                                     JSONObject jsonObject = jsonResult.getJSONObject(i);
                                     noteModels.add(new NoteModel(
                                             jsonObject.getString("id"),
@@ -141,6 +144,11 @@ public class ViewNotesActivity extends AppCompatActivity {
                                 xShimmerLayout.setVisibility(View.GONE);
                                 xListView.setVisibility(View.VISIBLE);
                                 xLayout.setVisibility(View.VISIBLE);
+                                if (jsonResult.length() == 0) {
+                                    xNoDataFound.setVisibility(View.VISIBLE);
+                                } else {
+                                    xNoDataFound.setVisibility(View.GONE);
+                                }
 
                             }
                         } catch (Exception e) {

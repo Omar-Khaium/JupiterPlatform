@@ -32,15 +32,9 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="Review"
+                android:textSize="16dp"
                 android:textColor="#6cb53f" />
 
-            <TextView
-                android:id="@+id/toolbarSubText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:textColor="#6cb53f" />
         </LinearLayout>
 
         <Button

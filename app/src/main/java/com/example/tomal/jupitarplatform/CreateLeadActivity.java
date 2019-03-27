@@ -77,7 +77,7 @@ public class CreateLeadActivity extends AppCompatActivity {
         alert = new AlertDialog.Builder(this);
         alert.setCancelable(false);
         loadingDialog = alert.create();
-        loadingView = LayoutInflater.from(this).inflate(R.layout.lottie_layout, new LinearLayout(this), false);
+        loadingView = LayoutInflater.from(this).inflate(R.layout.save_lottie_layout, new LinearLayout(this), false);
         //----------------------------------------------
 
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -114,6 +114,7 @@ public class CreateLeadActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onClick(View v) {
+                createButton.setEnabled(false);
                 if (!firstNameEdit.getText().toString().isEmpty() && !lastNameEdit.getText().toString().isEmpty() &&
                         !streetEdit.getText().toString().isEmpty() && !cityEdit.getText().toString().isEmpty()
                         && !stateEdit.getText().toString().isEmpty() && !zipEdit.getText().toString().isEmpty()
@@ -156,6 +157,7 @@ public class CreateLeadActivity extends AppCompatActivity {
                     client.newCall(request).enqueue(new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
+                            createButton.setEnabled(true);
                             loadingDialog.dismiss();
                         }
 
@@ -167,9 +169,11 @@ public class CreateLeadActivity extends AppCompatActivity {
                                 public void run() {
                                     try {
                                         loadingDialog.dismiss();
+                                        createButton.setEnabled(true);
                                         Toast.makeText(CreateLeadActivity.this, "Lead Created Successfully", Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(getApplicationContext(), LeadCentralActivity.class));
                                     } catch (Exception e) {
+                                        createButton.setEnabled(true);
                                         loadingDialog.dismiss();
                                         e.printStackTrace();
                                     }
@@ -203,8 +207,9 @@ public class CreateLeadActivity extends AppCompatActivity {
             }
         });
     }
+
     public void hideKeyboard(View view) {
-        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }

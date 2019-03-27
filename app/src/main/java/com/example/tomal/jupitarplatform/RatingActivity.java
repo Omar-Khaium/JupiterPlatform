@@ -2,8 +2,11 @@ package com.example.tomal.jupitarplatform;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,7 +16,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.util.Linkify;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,7 +26,6 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.emptybit.help.Format;
 import org.json.JSONArray;
@@ -38,7 +42,6 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static com.example.tomal.jupitarplatform.MainActivity.COMPANY_NAME;
 import static com.example.tomal.jupitarplatform.MainActivity.COOKIE_FOR_API;
 import static com.example.tomal.jupitarplatform.MainActivity.LEAD_ID;
 import static com.example.tomal.jupitarplatform.MainActivity.SITE_ID;
@@ -55,6 +58,10 @@ public class RatingActivity extends AppCompatActivity {
     String val_new;
     LeadCentralModel model;
     LinearLayout xLayout, xShimmerLayout;
+
+    View loadingView = null;
+    AlertDialog.Builder alert;
+    AlertDialog loadingDialog;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @SuppressLint({"WrongViewCast", "MissingPermission"})
@@ -85,10 +92,17 @@ public class RatingActivity extends AppCompatActivity {
         forth_rating = findViewById(R.id.forth_ratting);
         fifth_rating = findViewById(R.id.fifth_ratting);
         sixth_rating = findViewById(R.id.sixth_ratting);
-        rLayout = findViewById(R.id.rLayout);
         xDomainNameEditText = findViewById(R.id.domainNameEditText);
         saveBtn = findViewById(R.id.saveButton);
         numberTextView = findViewById(R.id.numberTextview);
+
+        //------------------------------------------
+        alert = new AlertDialog.Builder(this);
+        alert.setCancelable(false);
+        loadingDialog = alert.create();
+        loadingView = LayoutInflater.from(this).inflate(R.layout.save_lottie_layout, new LinearLayout(this), false);
+        //---------------------------------------------
+
         val_new = numberTextView.getText().toString().replaceAll("-", "");
         Linkify.addLinks(numberTextView, Linkify.ALL);
         numberTextView.setLinkTextColor(Color.parseColor("#6cb53f"));
@@ -101,42 +115,6 @@ public class RatingActivity extends AppCompatActivity {
                 startActivity(CallIntent);
             }
         });
-
-        /*Gson gson = new Gson();
-        model = gson.fromJson(getIntent().getStringExtra("myjson"), LeadCentralModel.class);*/
-
-        TextView mTitle = toolbar.findViewById(R.id.toolbarText);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        subText = findViewById(R.id.toolbarSubText);
-        subText.setText(COMPANY_NAME);
-        /*if (model.getFname().equals("") || model.getFname().equals("null") || model.getFname()==null)
-        {
-            if (model.getLname().equals("") || model.getLname().equals("null") || model.getLname()==null){
-                xFirstname.setText("-");
-            }
-            else {
-                xFirstname.setText(Format.Text(model.getLname()));
-            }
-        }
-        else {
-            if (model.getLname().equals("") || model.getLname().equals("null") || model.getLname()==null){
-                xFirstname.setText(model.getLname());
-            }
-            else {
-                if (model.getLname().length()>2) {
-                    xFirstname.setText(model.getFname() + " " + (model.getLname().substring(0, 2) + "."));
-                } else {
-                    xFirstname.setText(model.getFname() + " " + (model.getLname().substring(0, 1) + "."));
-                }
-            }
-        }
-        xCity.setText(model.getCity());
-        xState.setText(model.getState());
-        xZip.setText(getIntent().getStringExtra("zipCode"));*/
-
-//        getData();
         saveButton();
         Button backButton = findViewById(R.id.back_button);
 
@@ -148,7 +126,7 @@ public class RatingActivity extends AppCompatActivity {
             }
         });
 
-    rLayout.setOnClickListener(new View.OnClickListener() {
+        xLayout.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             hideKeyboard(v);
@@ -173,8 +151,19 @@ public class RatingActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onClick(View v) {
+                saveBtn.setEnabled(false);
 
                 if (!xComment.getText().toString().isEmpty() && !xDomainNameEditText.getText().toString().isEmpty()) {
+                    alert.setView(loadingView);
+                    loadingDialog = alert.create();
+                    loadingDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    loadingDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+                            ((ViewGroup) loadingView.getParent()).removeView(loadingView);
+                        }
+                    });
+                    loadingDialog.show();
                     OkHttpClient client = new OkHttpClient();
 
                     MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
@@ -202,7 +191,8 @@ public class RatingActivity extends AppCompatActivity {
                     client.newCall(request).enqueue(new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
-                            Toast.makeText(getApplicationContext(), "Exception occured : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            loadingDialog.dismiss();
+                            saveBtn.setEnabled(true);
                         }
 
                         @Override
@@ -213,9 +203,12 @@ public class RatingActivity extends AppCompatActivity {
                                 public void run() {
                                     try {
                                         if (response.code() == 200) {
-                                            Toast.makeText(RatingActivity.this, "Rating Uploaded Successfully", Toast.LENGTH_SHORT).show();
+                                            loadingDialog.dismiss();
+                                            saveBtn.setEnabled(true);
+                                            startActivity(new Intent(getApplicationContext(), ReviewNoteActivity.class));
                                         }
                                     } catch (Exception e) {
+                                        loadingDialog.dismiss();
                                         e.printStackTrace();
                                     }
                                 }
@@ -228,7 +221,8 @@ public class RatingActivity extends AppCompatActivity {
                     if (xComment.getText().toString().isEmpty()) {
                         xComment.setError("*Please enter comment");
                     } else if (xDomainNameEditText.getText().toString().isEmpty()) {
-                        xComment.setError("*Please enter domain name");
+                        xDomainNameEditText.setError("*Please enter domain name");
+
                     }
                 }
             }
@@ -239,6 +233,7 @@ public class RatingActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public void getData() {
+
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder()
