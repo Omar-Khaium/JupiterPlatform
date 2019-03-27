@@ -273,6 +273,12 @@ public class DetailsActivity extends AppCompatActivity {
         xDialog.dismiss();
     }
 
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        noteEditText.setText("");
+    }
+
     private void submitButton() {
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
