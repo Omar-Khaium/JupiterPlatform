@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -77,7 +78,7 @@ public class ViewMediaAdapter extends RecyclerView.Adapter<ViewMediaAdapter.View
                     ImageView xPhoto = convertView.findViewById(R.id.alert_image);
                     ImageView xClose = convertView.findViewById(R.id.alert_close);
 
-                    Picasso.get().load(Format.Text(arrayList.get(i).getPhoto())).into(xPhoto);
+                    Picasso.get().load(Format.Text(arrayList.get(i).getPhoto())).placeholder(R.drawable.loading).error(R.drawable.loading).into(xPhoto);
                     xClose.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -100,12 +101,24 @@ public class ViewMediaAdapter extends RecyclerView.Adapter<ViewMediaAdapter.View
                     LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     final View convertView = inflater.inflate(R.layout.video_view_layout, new LinearLayout(context), false);
 
-                    VideoView xPhoto = convertView.findViewById(R.id.alert_image);
+                    final VideoView videoView = convertView.findViewById(R.id.alert_image);
                     ImageView xClose = convertView.findViewById(R.id.alert_close);
+                    final ImageView xThumbnail = convertView.findViewById(R.id.placeholder);
 
-                    //Uri videoFileUri = Uri.parse(arrayList.get(i).getFileType());
-                    xPhoto.setVideoPath(arrayList.get(i).getPhoto());
-                    xPhoto.start();
+                    videoView.setVideoPath(arrayList.get(i).getPhoto());
+                    videoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+                        @Override
+                        public boolean onError(MediaPlayer mp, int what, int extra) {
+                            return false;
+                        }
+                    });
+                    videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                        @Override
+                        public void onPrepared(MediaPlayer mp) {
+                            xThumbnail.setVisibility(View.GONE);
+                            videoView.start();
+                        }
+                    });
                     xClose.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

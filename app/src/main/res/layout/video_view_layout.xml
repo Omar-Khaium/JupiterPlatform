@@ -23,6 +23,16 @@
                 android:adjustViewBounds="true" />
 
             <ImageView
+                android:id="@+id/placeholder"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:adjustViewBounds="true"
+                android:src="@drawable/loading" />
+
+            <ImageView
                 android:id="@+id/alert_close"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
