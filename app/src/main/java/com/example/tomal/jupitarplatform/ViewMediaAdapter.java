@@ -119,6 +119,7 @@ public class ViewMediaAdapter extends RecyclerView.Adapter<ViewMediaAdapter.View
                             videoView.start();
                         }
                     });
+
                     xClose.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
